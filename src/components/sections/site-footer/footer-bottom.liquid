@@ -1,0 +1,90 @@
+{% liquid
+  assign blocks = section.blocks
+  assign copyright = section.settings.copyright
+  assign text_link = section.settings.text_link
+%}
+
+<div class="footer-bottom border-t border-solid border-default md:border-none">
+  <div class="container">
+    <div class="py-6 flex justify-between flex-col-reverse items-center md:flex-row md:border-t md:border-solid md:py-8 md:border-default">
+      {%- if copyright != blank or text_link != blank -%}
+        <div class="flex flex-col-reverse w-[231px] mx-auto text-center md:w-auto md:mx-0 md:flex-row">
+          <p class="text-sm text-grey-700 mt-4 md:mt-0">{{- copyright -}}</p>
+          <div class="text-info-content text-sm [&>p>a]:whitespace-nowrap [&>p>a]:underline [&>p]:flex [&>p>a]:mr-4 [&>p>a:last-child]:mr-0 md:ml-6 wysiwyg--footer-bottom">{{- text_link -}}</div>
+        </div>
+      {%- endif -%}
+      {%- if blocks.size > 0 -%}
+        <div class="flex mb-6 gap-x-3 gap-y-2 md:mb-0 md:ml-auto">
+          {%- for block in blocks -%}
+            {%- if block.settings.icon_link != blank -%}
+              <a href="{{- block.settings.icon_link -}}" class="rounded w-9 h-6" title="Payment icon">
+            {%- else -%}
+              <div class="rounded w-9 h-6">
+            {%- endif -%}
+              {%- render 'image',
+                image: block.settings.image,
+                class: 'w-full h-full',
+                object_fit: 'contain'
+              -%}
+            {%- if block.settings.icon_link == blank -%}
+              </div>
+            {%- else -%}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        {%- assign enabled_payment_types = 'master,visa,american_express,paypal,apple_pay,afterpay' | remove: ' ' | split: ',' -%}
+        <div class="flex gap-x-3 gap-y-2 mb-6 md:mb-0 md:ml-auto">
+          {%- for type in enabled_payment_types -%}
+            <div class="rounded w-9 h-6">
+              <img
+                src="{{- type | payment_type_img_url -}}"
+                alt="{{- type -}}"
+                loading="lazy"
+                class="w-full h-full object-contain"
+                width="35"
+                height="24"
+              >
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Footer bottom",
+  "settings": [
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright"
+    },
+    {
+      "type": "richtext",
+      "id": "text_link",
+      "label": "Text Link"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Icon",
+      "type": "icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "icon_link",
+          "label": "Icon link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

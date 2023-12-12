@@ -1,0 +1,1 @@
+{"version":3,"file":"./assets/module-image-zoom.css","mappings":"AAAA","sources":["webpack://gamma/assets/module-image-zoom.css"],"sourcesContent":["[is='image-zoom'] {\n  transition: transform 0.05s ease-in-out;\n  transform-origin: 0px 0px;\n}\n\n"],"names":[],"sourceRoot":""}

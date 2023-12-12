@@ -1,0 +1,49 @@
+{% liquid
+  if template contains 'gift-card' or product.gift_card?
+    assign class_inner = 'pt-5 pb-8'
+  else
+    assign class_inner = 'py-8'
+  endif
+  assign title = 'product.general.recently_viewed' | t
+%}
+
+{%- render 'anchor-section' -%}
+<product-main
+  class="js-anchor-section js-product-main flex flex-col border-t border-default md:flex-row"
+  id="product-details"
+  data-title="Details"
+  data-handle="{{- product.handle -}}"
+>
+  <div class="flex-auto">
+    {%- render 'product-gallery', enable_zoom: section.settings.enable_gallery_zoom -%}
+  </div>
+  <div class="w-full flex-shrink-0 px-4 md:w-[384px] md:border-l md:border-default md:px-6 lg:w-[375px] xl:w-[430px] xl:px-8">
+    {%- render 'product-info' -%}
+    {%- render 'product-form' -%}
+    {%- render 'product-bought' -%}
+    <div class="{{ class_inner }}">
+      {%- render 'product-description', description: product.description -%}
+      {%- render 'product-share' -%}
+    </div>
+  </div>
+</product-main>
+
+{%- capture src_url -%}
+  {{- 'section-product-main.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}
+
+{% schema %}
+{
+  "name": "Product main",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_gallery_zoom",
+      "label": "Enable gallery zoom",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

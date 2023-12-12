@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "login_form": {
+      "type": "account-tab"
+    }
+  },
+  "order": [
+    "login_form"
+  ]
+}

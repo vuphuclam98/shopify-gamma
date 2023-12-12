@@ -1,0 +1,92 @@
+{%- capture carousel_contents -%}
+  {% for block in section.blocks %}
+    {%- render 'card',
+      url: block.settings.cta_url,
+      class: 'group carousel-item snap-start shrink-0 w-[296px] md:w-[320px] xl:w-1/4 p-6 md:p-8 border-default border border-r-0 first:border-l-0 transition duration-300 ease-in-out flex flex-col',
+      content_class: 'flex flex-col grow',
+      image_wrapper_class: 'relative overflow-hidden rounded-2xl aspect-[264/267] md:aspect-[257/280] lg:aspect-[297/280]',
+      image: block.settings.image,
+      image_class: 'fit object-cover hover:zoom',
+      mobile_width: 248,
+      md_width: 256,
+      lg_width: 296,
+      title: block.settings.title,
+      title_class: 'mt-4 md:mt-6 text-2xl font-bold text-grey-900 transition duration-300 ease-in-out',
+      description: block.settings.description,
+      description_class: 'text-sm mt-1 md:mt-2 font-normal mb-auto transition duration-300 ease-in-out',
+      cta_text: block.settings.cta_text,
+      cta_class: 'button-outlined uppercase w-fit mt-11 group-hover:button-outlined-white'
+    -%}
+  {% endfor %}
+{%- endcapture -%}
+
+{%- if carousel_contents != blank -%}
+  {%- render 'carousel',
+    class: 'carousel-enable carousel-full',
+    content: carousel_contents,
+    class_buttons: '!hidden',
+    class_dots: 'hidden',
+    class_main: 'p-0'
+  -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Featured products",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Cta text"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Cta url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products",
+      "category": "Card Grid",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

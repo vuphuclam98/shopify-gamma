@@ -1,0 +1,113 @@
+{%- liquid
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+  assign title = section.settings.title
+  assign subtitle = section.settings.subtitle
+  assign cta_text = section.settings.cta_text
+  assign cta_link = section.settings.cta_link
+  assign content_position_vertical = section.settings.content_position_vertical
+  assign content_position_horizontal = section.settings.content_position_horizontal
+  assign enable_background = section.settings.enable_background
+  assign content_inner_class = 'md-max:w-full'
+-%}
+
+{%- if enable_background -%}
+  {%- assign background = section.settings.background_color -%}
+  {%- assign content_inner_class = content_inner_class | append: ' px-8 lg:px-10 py-7 lg:py-9' -%}
+{%- endif -%}
+
+{%- render 'full-banner',
+  image: image,
+  image_mobile: image_mobile,
+  url: cta_link,
+  title: title,
+  subtitle: subtitle,
+  cta_text: cta_text,
+  content_position_vertical: content_position_vertical,
+  content_position_horizontal: content_position_horizontal,
+  content_class: ' px-4 md:px-8 xl:px-12 py-7 md:py-11 lg:py-8 xl:py-16 ',
+  title_class: 'text-3xl md:text-4xl text-white font-bold mb-2',
+  subtitle_class: 'text-base font-normal md:text-xl text-white max-w-[344px] md:max-w-[456px] mb-6',
+  background_color: background,
+  content_inner_class: content_inner_class
+-%}
+
+{% schema %}
+{
+  "name": "Full Width Banner",
+  "class": "shopify-section--full-width-banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_background",
+      "label": "Enable content background",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Content's background color"
+    },
+    {
+      "type": "select",
+      "id": "content_position_vertical",
+      "label": "Position of content vertically",
+      "options": [
+        { "value": "items-start", "label": "Top" },
+        { "value": "items-center", "label": "Center" },
+        { "value": "items-end", "label": "Bottom" }
+      ],
+      "default": "items-center"
+    },
+    {
+      "type": "select",
+      "id": "content_position_horizontal",
+      "label": "Position of content horizontally",
+      "options": [
+        { "value": "justify-start", "label": "Left" },
+        { "value": "justify-center", "label": "Center" },
+        { "value": "justify-end", "label": "Right" }
+      ],
+      "default": "justify-center"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full Width Banner",
+      "category": "Banner"
+    }
+  ]
+}
+{% endschema %}

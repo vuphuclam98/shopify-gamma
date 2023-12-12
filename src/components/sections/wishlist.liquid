@@ -1,0 +1,44 @@
+{%- assign wishlist_sidebar_class = "flex-items-center justify-start py-6 border-b border-default text-sm last:border-b-0 font-bold text-grey-500 [&.active]:text-grey-900 [&.active]:after:content-[''] [&.active]:after:w-1.5 [&.active]:after:h-1.5 [&.active]:after:rounded-full [&.active]:after:bg-secondary [&.active]:after:ml-auto [&.active]:after:mr-2.5 [&.active]:underline js-sidebar-item" -%}
+<div class="bg-grey-100 lg:py-12">
+  <div class="container">
+    <div class="flex flex-col gap-4 pb-4 lg:flex-row lg:items-start lg:gap-8">
+      <div class="-mx-4 border-b border-default md:-mx-6 lg:m-0 lg:w-[292px] lg:overflow-hidden lg:rounded lg:border">
+        <account-sidebar class="relative flex bg-white">
+          <div class="js-sidebar-current flex w-full justify-between p-4 md:px-6 lg:hidden">
+            <span class="js-sidebar-current-text flex justify-start font-bold">
+              {%- render 'icon' with 'icon-heart-2', class: 'mr-3' -%}
+              {{- 'customer.account.favourites' | t -}}
+            </span>
+            {%- render 'icon' with 'icon-chevron-up', class: 'transition-transform rotate-180 js-sidebar-current-icon' -%}
+          </div>
+          <nav class="js-sidebar-nav absolute left-0 top-full z-10 hidden w-full border-y border-default bg-white px-4 lg:static lg:block lg:border-none lg:px-6 lg-max:h-fit [&.active]:block">
+            <a href="#" class="{{ wishlist_sidebar_class }} active">
+              {%- render 'icon' with 'icon-heart-2', class: 'mr-3' -%}
+              {{- 'customer.account.favourites' | t -}}
+            </a>
+            <a href="{{ routes.account_register_url }}" class="{{ wishlist_sidebar_class }}">
+              {%- render 'icon' with 'icon-person-outline', class: 'mr-3' -%}
+              {{- 'customer.login_page.create_account' | t -}}
+            </a>
+          </nav>
+        </account-sidebar>
+      </div>
+      <div class="rounded border border-default bg-white p-4 lg:flex-1 lg:p-8">
+        {%- render 'wishlist-page' -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- if customer -%}
+  <script type="text/javascript">
+    window.location.href = '/account?view=favourites'
+  </script>
+{%- endif -%}
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-account-sidebar.js' | asset_url -}}
+  {%- endcapture -%}
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

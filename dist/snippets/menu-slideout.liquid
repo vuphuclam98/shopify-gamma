@@ -1,0 +1,307 @@
+{%- liquid
+  assign blocks = blocks
+  assign menu_handle = menu_handle | default: 'main-menu'
+  assign menu_second_handle = menu_second_handle | default: nil
+  assign menu = linklists[menu_handle]
+  assign menu_second = linklists[menu_second_handle]
+  assign account_url = routes.account_url
+  assign mega_item_class = 'border-b border-default w-full'
+  assign sub_header_class = 'flex items-center justify-between w-full px-6 pt-5 pb-[18px] border-b border-default min-h-[63px]'
+  assign sub_header_title_class = 'block mr-auto text-sm font-bold uppercase text-grey-900 mt-0.5'
+  assign menu_list_class = 'w-full p-6 pt-0'
+  assign menu_list_item_class = 'inline-block link w-full text-grey-900 no-underline hover:underline mb-[18px]'
+  assign banner_background = settings.banner_background
+  assign banner_image = settings.banner_image
+  assign banner_image_class = ''
+
+  assign banner_title = settings.banner_title
+  assign banner_cta = settings.banner_cta
+  assign banner_url = settings.banner_url | default: '/'
+  assign banner_text_color = settings.banner_text_color
+
+  if banner_background != blank
+    if banner_title == blank and banner_cta == blank
+      assign banner_image_class = banner_image_class | append: 'absolute inset-0 w-full h-full object-cover pointer-events-none'
+    endif
+  endif
+
+  assign _prefix_icon = '[icon-'
+  assign _prefix_icon_start = '['
+  assign _prefix_icon_end = ']'
+
+  if customer
+    assign account_title = 'customer.account.logged' | t
+  else
+    assign account_title = 'menu_slideout.login_register' | t
+  endif
+
+  capture sub_header_icon
+    render 'icon' with 'icon-chevron-back-outline', class: 'w-4 h-4 mr-2'
+  endcapture
+-%}
+
+{%- capture menu_slideout_ctas -%}
+  {%- if settings.cta_image_1 != blank or settings.cta_image_2 != blank -%}
+    <div class="grid grid-cols-2 gap-4">
+      {%- for i in (1..2) -%}
+        {%- capture cta_image_settings -%}cta_image_{{ i }}{%- endcapture -%}
+        {%- capture cta_text_settings -%}cta_text_{{ i }}{%- endcapture -%}
+        {%- capture cta_url_settings -%}cta_url_{{ i }}{%- endcapture -%}
+        {%- assign cta_image = settings[cta_image_settings] -%}
+        {%- assign cta_text = settings[cta_text_settings] -%}
+        {%- assign cta_url = settings[cta_url_settings] | default: '#' -%}
+
+        {%- if cta_image != blank -%}
+          <a href="{{ cta_url }}" class="block overflow-hidden rounded-t">
+            <div class="relative aspect-[156/114]">
+              {%- render 'image', image: cta_image, class: 'fit' -%}
+            </div>
+            {%- if cta_text != blank -%}
+              <div class="py-3 text-center border border-t-0 rounded-b border-default">
+                <p class="font-bold tracking-normal text-sm text-grey-900">{{ cta_text }}</p>
+              </div>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture second_menu_content -%}
+  <div class="flex flex-col">
+    <div class="px-6 py-8">
+      {%- assign second_menu_class = 'mb-6 flex items-center justify-start w-fit text-menu-item-mobile' -%}
+      <a class="{{ second_menu_class }}" href="{{- account_url -}}">
+        {%- render 'icon' with 'icon-person', class: 'mr-3 text-grey-500' -%}
+        <span class="block text-sm">{{- account_title -}}</span>
+      </a>
+      {%- if menu_second != blank -%}
+        {%- for link in menu_second.links -%}
+          {%- assign mod_title = link.title -%}
+          {%- if mod_title contains _prefix_icon -%}
+            {%- assign _icon_name = mod_title | split: _prefix_icon_start | last | split: _prefix_icon_end | first -%}
+            {%- capture _icon_short_code -%}{{- _prefix_icon_start -}}{{- _icon_name -}}{{- _prefix_icon_end -}}{%- endcapture -%}
+            {%- capture _icon_svg -%}{%- render 'icon' with _icon_name, class: 'mr-3 text-grey-500' -%}{%- endcapture -%}
+            {%- assign mod_title = mod_title | remove: _icon_short_code | strip -%}
+            {%- if _icon_svg contains 'svg' -%}
+              {%- assign mod_icon = _icon_svg -%}
+            {%- endif -%}
+          {%- endif -%}
+          <a href="{{- link.url -}}" class="{% if forloop.last %}mb-0 {% endif %}{{ second_menu_class }}">
+            {%- unless mod_icon == blank -%}
+              {{- mod_icon -}}
+            {%- endunless -%}
+            <span class="block text-sm">{{- mod_title | escape -}}</span>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+{%- endcapture -%}
+
+<menu-slideout class="fixed top-menu-mobile height-menu-mobile bottom-0 invisible [&.open-slideout]:visible left-0 opacity-0 w-full translate-y-[-100%] [&.open-slideout]:translate-y-0 [&.open-slideout]:opacity-100 [&.open-slideout]:pointer-events-auto transition-all overflow-hidden lg:hidden duration-300 bg-grey-100">
+  <div class="relative z-20 w-full h-full overflow-x-hidden overflow-y-auto js-menu-list">
+    <div class="p-6 bg-white">
+       {%- if banner_image != blank -%}
+          {%- if banner_title != blank or banner_cta != blank -%}
+            <div class="relative rounded h-[90px] flex items-center justify-between w-full mb-2 pl-6 pt-2 pb-[5px] pr-[15px]" style="background-color: {{ banner_background }}">
+          {%- else-%}
+            <a href="{{ banner_url }}" class="relative rounded h-[90px] flex items-center justify-between w-full" style="background-color: {{ banner_background }}">
+          {%- endif -%}
+
+          {%- if banner_title != blank or banner_cta != blank -%}
+            <div class="flex flex-col mr-1.5" style="color: {{ banner_text_color }}">
+              {%- if banner_title != blank -%}
+                <b class="text-inherit mb-0.5">{{ banner_title }}</b>
+              {%- endif -%}
+              {%- if banner_cta != blank -%}
+                <a href="{{ banner_url }}" class="block tracking-normal underline w-fit text-inherit text-sm">{{ banner_cta }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          <img class="{{ banner_image_class }}" src="{{ banner_image | image_url }}" alt="{{ banner_title }}" width="{{- banner_image.width -}}" height="{{- banner_image.height -}}" loading="lazy">
+
+          {%- if banner_title != blank or banner_cta != blank -%}
+            </div>
+          {%- else-%}
+            </a>
+          {%- endif -%}
+       {%- endif -%}
+      {%- for link in menu.links -%}
+        {%- for block in blocks -%}
+          {%- if link.title == block.settings.title and block.settings.featured_image != blank -%}
+            {%- capture second_menu_featured -%}
+              <img src="{{- block.settings.featured_image | image_url -}}" alt="{{- link.title | escape -}}" class="block" width="{{- block.settings.featured_image.width -}}" height="{{- block.settings.featured_image.height -}}" loading="lazy">
+            {%- endcapture -%}
+          {%- endif -%}
+        {%- endfor -%}
+        <div class="{{ mega_item_class }}{% if link.links != blank %} is-mega{% endif %}">
+          <button
+            class="relative flex items-center justify-between w-full py-4"
+            {%- if link.links != blank -%}
+              onclick="this.closest('.is-mega').classList.toggle('is-active');"
+            {%- endif -%}
+          >
+            <div class="w-16 h-16">
+              {{ second_menu_featured }}
+            </div>
+            <p class="block ml-4 mr-auto font-bold uppercase text-grey-900 text-menu-item-mobile w-fit text-sm">{{- link.title | escape -}}</p>
+            {%- if link.links != blank -%}
+              {%- render 'icon' with 'icon-chevron-forward-outline', class: 'w-4 h-4' -%}
+            {%- endif -%}
+          </button>
+          {%- if link.links != blank -%}
+            <div class="fixed w-full z-20 top-0 left-full bottom-0 duration-300 invisible [.is-active>&]:visible [.is-active>&]:left-0 bg-grey-100 overflow-x-hidden overflow-y-auto js-sub-menu-slideout">
+              <div class="bg-white">
+                <button
+                  class="{{ sub_header_class }}"
+                  onclick="this.closest('.is-mega').classList.toggle('is-active');"
+                >
+                  {{ sub_header_icon }}
+                  <span class="{{ sub_header_title_class }}">{{- link.title | escape -}}</span>
+                  <a href="{{- link.url -}}" class="tracking-normal normal-case text-sm link text-grey-500">{{ 'menu_slideout.view_all' | t }}</a>
+                </button>
+                {%- if link.links != blank -%}
+                  <div class="{{ menu_list_class }}{% if link.levels == 1 %} columns-2 sm:columns-3 mt-[27px]{% endif %}">
+                    {%- for block in blocks -%}
+                      {%- if block.settings.title == link.title and block.settings.featured_navigation != blank and link.levels > 1 -%}
+                        <div class="{{ mega_item_class }} is-sub-mega">
+                          <button
+                            class="relative flex items-center justify-between w-full py-4"
+                            onclick="this.closest('.is-sub-mega').classList.toggle('is-sub-active');"
+                          >
+                            {%- assign featured_navigation_image = block.settings.featured_navigation_image -%}
+                            <div class="w-16 h-16">
+                              {%- if featured_navigation_image != blank -%}
+                                <img src="{{- featured_navigation_image | image_url -}}" alt="{{- link.title | escape -}}" class="block object-cover h-full" width="64" height="64" loading="lazy">
+                              {%- else -%}
+                                {{ second_menu_featured }}
+                              {%- endif -%}
+                            </div>
+                            <p class="block ml-4 mr-auto font-bold uppercase text-menu-item-mobile w-fit text-sm">{{ 'menu_slideout.featured' | t }}</p>
+                            {%- if link.links != blank -%}
+                              {%- render 'icon' with 'icon-chevron-forward-outline', class: 'w-4 h-4' -%}
+                            {%- endif -%}
+                          </button>
+                          <div class="fixed w-full z-20 top-0 left-full bottom-0 duration-300 [.is-sub-active>&]:left-0 bg-grey-100 overflow-x-hidden overflow-y-auto">
+                            <div class="bg-white">
+                              <button
+                                class="{{ sub_header_class }}"
+                                onclick="this.closest('.is-sub-mega').classList.toggle('is-sub-active');"
+                              >
+                                {{ sub_header_icon }}
+                                <span class="{{ sub_header_title_class }}">{{ 'menu_slideout.featured' | t }}</span>
+                              </button>
+                              <div class="{{ menu_list_class }}">
+                                <div class="columns-2 sm:columns-3 mt-[27px]">
+                                  {%- for item in linklists[block.settings.featured_navigation].links -%}
+                                    {%- assign item_title_handle = item.title | handle -%}
+                                    <a href="{{ item.url }}" class="{{ menu_list_item_class }}{% if item_title_handle == 'sale' %} text-error-content hover:text-error-content{% endif %}">{{ item.title }}</a>
+                                  {%- endfor -%}
+                                </div>
+                                {%- if menu_slideout_ctas != blank -%}
+                                  <div class="mt-2.5">
+                                    {{ menu_slideout_ctas }}
+                                  </div>
+                                {%- endif -%}
+                              </div>
+                            </div>
+                            {{ second_menu_content }}
+                          </div>
+                        </div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- for child_link in link.links -%}
+                      {%- if child_link.levels > 0 -%}
+                        <div class="{{ mega_item_class }} is-sub-mega">
+                          <button
+                            class="relative flex items-center justify-between w-full py-4"
+                            onclick="this.closest('.is-sub-mega').classList.toggle('is-sub-active');"
+                          >
+                            {%- liquid
+                              assign child_link_title = child_link.title | split: ']' | last
+                              assign child_link_image = child_link.title | replace: child_link_title | split: ']' | first | replace: '[', ''
+                            -%}
+                            <div class="w-16 h-16">
+                              {%- if child_link_image != blank -%}
+                                <img src="{{- child_link_image | image_url: 'large' -}}" alt="{{- link.title | escape -}}" class="block object-cover h-full" width="64" height="64" loading="lazy">
+                              {%- else -%}
+                                {{ second_menu_featured }}
+                              {%- endif -%}
+                            </div>
+                            <p class="block ml-4 mr-auto font-bold uppercase text-menu-item-mobile w-fit text-sm">{{- child_link_title | escape -}}</p>
+                            {%- if link.links != blank -%}
+                              {%- render 'icon' with 'icon-chevron-forward-outline', class: 'w-4 h-4' -%}
+                            {%- endif -%}
+                          </button>
+                          <div class="fixed w-full z-20 top-0 left-full bottom-0 duration-300 [.is-sub-active>&]:left-0 bg-grey-100 overflow-x-hidden overflow-y-auto">
+                            <div class="bg-white">
+                              <button
+                                class="{{ sub_header_class }}"
+                                onclick="this.closest('.is-sub-mega').classList.toggle('is-sub-active');"
+                              >
+                                {{ sub_header_icon }}
+                                <span class="{{ sub_header_title_class }}">{{- child_link.title | split: ']' | last | escape -}}</span>
+                              </button>
+                              <div class="{{ menu_list_class }}">
+                                <div class="columns-2 sm:columns-3 mt-[27px]">
+                                  {%- for item in child_link.links -%}
+                                    <a href="{{ item.url }}" class="{{ menu_list_item_class }}">{{ item.title }}</a>
+                                  {%- endfor -%}
+                                </div>
+                                {%- if menu_slideout_ctas != blank -%}
+                                  <div class="mt-2.5">
+                                    {{ menu_slideout_ctas }}
+                                  </div>
+                                {%- endif -%}
+                              </div>
+                            </div>
+                            {{ second_menu_content }}
+                          </div>
+                        </div>
+                      {%- else -%}
+                        <a href="{{- child_link.url -}}" class="{{ menu_list_item_class }}">
+                          {{- child_link.title | escape -}}
+                        </a>
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- if link.levels != 1 and menu_slideout_ctas != blank -%}
+                      <div class="mt-7">
+                        {{ menu_slideout_ctas }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  {%- if link.levels == 1 and menu_slideout_ctas != blank -%}
+                    <div class="-mt-[17px] p-6 pt-0">
+                      {{ menu_slideout_ctas }}
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+              {{ second_menu_content }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+      {%- if menu_slideout_ctas != blank -%}
+        <div class="mt-7">
+          {{ menu_slideout_ctas }}
+        </div>
+      {%- endif -%}
+    </div>
+    {{ second_menu_content }}
+  </div>
+</menu-slideout>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-menu-slideout.js' | asset_url -}}
+  {%- endcapture -%}
+
+  {%- render 'atom_script',
+    src: src_url,
+    priority: 'normal',
+    type: "defer"
+  -%}
+{%- endunless -%}

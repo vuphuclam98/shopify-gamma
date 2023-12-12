@@ -1,0 +1,77 @@
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter Popup"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_popup_title",
+      "label": "Title",
+      "default": "Sign up to Convert"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_popup_description",
+      "label": "Description",
+      "default": "DLorem ipsum dolor sit amet."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_popup_button_text",
+      "label": "Button Text",
+      "default": "JOIN NOW"
+    },
+    {
+      "type": "image_picker",
+      "id": "newsletter_background",
+      "label": "Newsletter Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "newsletter_background_mobile",
+      "label": "Newsletter Background Mobile"
+    },
+    {
+      "type": "richtext",
+      "id": "text_form",
+      "label": "Text Form"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_email_placeholder",
+      "label": "Email Placeholder",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_message_success",
+      "label": "Message Success",
+      "default": "Thank you for subcribing"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_message_duplicate",
+      "label": "Message Duplicate",
+      "default": "Email address is subscribed"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "Klaviyo List ID"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_public_key",
+      "label": "Klaviyo public key",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_bis_url",
+      "label": "Klaviyo Back in stock URL",
+      "default": "https:\/\/a.klaviyo.com\/onsite\/components\/back-in-stock\/subscribe"
+    }
+  ]
+}

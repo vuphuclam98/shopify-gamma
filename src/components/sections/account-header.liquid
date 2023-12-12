@@ -1,0 +1,19 @@
+{%- render 'breadcrumbs', class: 'bg-grey-100' -%}
+
+<div class="bg-grey-100 pt-2 pb-4 md:pt-11 md:pb-6">
+  <div class="container flex flex-col items-center justify-between lg:flex-row">
+    {% if template contains 'addresses' %}
+      <h1 class="h4 mb-1 md:mb-0 md:text-3xl">{{- 'customer.addresses.title' | t -}}</h1>
+    {% elsif template contains 'order' %}
+      <h1 class="h4 mb-1 md:mb-0 md:text-3xl">{{- page_title -}}</h1>
+    {% else %}
+      <h1 class="h4 mb-1 md:mb-0 md:text-3xl">{{- 'customer.account.title' | t -}}</h1>
+    {% endif %}
+    <div>
+      {% if template contains 'addresses' or template contains 'order' %}
+        <a href="{{- routes.account_url -}}" class="link-gray mr-4 normal-case text-grey-700 md:text-grey-700">{{- 'customer.account.return' | t -}}</a>
+      {% endif %}
+      <a href="{{- routes.account_logout_url -}}" class="link-gray text-grey-700 md:text-grey-700">{{- 'customer.account.logout' | t -}}</a>
+    </div>
+  </div>
+</div>

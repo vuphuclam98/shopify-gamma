@@ -1,0 +1,58 @@
+{%- liquid
+  assign class = class | default: 'py-[9px] md:py-[14px] text-xs '
+  assign item_class = "inline-block after:content-['/'] after:text-grey-500 after:text-xs after:mx-2 last:after:content-none" | append: ' ' | append: item_class
+  assign item_current_class = item_current_class | prepend: "inline-block after:content-['/'] after:mx-2 last:after:content-none text-info-content md-max:max-w-[290px] whitespace-nowrap overflow-auto scrollbar-breadcrumb "
+-%}
+<div class="{{ class }}">
+  <div class="container">
+    <ol class="flex items-center">
+      <li class="{{ item_class }}"><a href="{{ routes.root_url }}" class="link whitespace-nowrap text-xs text-grey-900">Home</a></li>
+      {% if template.name == 'product' %}
+        {% if collection.url %}
+          <li class="{{ item_class }}">
+            <a href="{{ collection.url }}" class="link whitespace-nowrap text-xs text-grey-900">{{ collection.title }}</a>
+          </li>
+        {% endif %}
+        <li class="{{ item_current_class }}">{{ product.title }}</li>
+      {%- elsif template.name == 'collection' and collection.handle -%}
+        {%- if current_tags -%}
+          {% capture url %}{{ routes.collections_url }}/{{ collection.handle }}{% endcapture %}
+          <li class="{{ item_class }}">
+            <a href="{{ url }}" class="link whitespace-nowrap text-xs text-grey-900">{{ collection.title }}</a>
+          </li>
+        {%- else -%}
+          <li class="{{ item_current_class }}">{{ collection.title }}</li>
+        {%- endif -%}
+      {%- elsif template.name == 'page' -%}
+        <li class="{{ item_current_class }}">{{ page.title }}</li>
+      {%- elsif template.name == 'blog' -%}
+        <li class="{{ item_current_class }}">{{ blog.title }}</li>
+      {%- elsif template.name == 'article' -%}
+        {%- if blog.url != blank and blog.title != blank -%}
+          <li class="{{ item_class }}">
+            <a href="{{ blog.url }}" class="link text-xs text-grey-900">{{ blog.title }}</a>
+          </li>
+        {%- endif -%}
+        {%- if article.title != blank -%}
+          <li class="{{ item_current_class }}">{{ article.title }}</li>
+        {%- endif -%}
+      {%- elsif template.name == 'cart' -%}
+        <li class="{{ item_current_class }}">Cart</li>
+      {%- elsif template.name == 'login' -%}
+        <li class="{{ item_current_class }}">Login</li>
+      {%- elsif template.name == 'addresses' or template.name == 'order' -%}
+        <li class="{{ item_current_class }}">Account</li>
+      {%- elsif template.name == 'search' -%}
+        <li class="{{ item_current_class }}">
+          {%- if search.terms -%}
+            {{ search.terms }}
+          {%- else -%}
+            {{ 'search.title' | t }}
+          {%- endif -%}
+        </li>
+      {%- else -%}
+        <li class="{{ item_current_class }}">{{ page_title }}</li>
+      {% endif %}
+    </ol>
+  </div>
+</div>

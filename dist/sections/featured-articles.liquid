@@ -1,0 +1,104 @@
+{%- assign mod_settings = section.settings -%}
+
+{%- if mod_settings.blog != blank or section.blocks.size > 0 -%}
+  <div class="featured-articles relative py-6 lg:py-12" style="background-color: {{ mod_settings.bg_color }};">
+    {%- capture carousel_content -%}
+      {%- assign article_card_class = 'carousel-item min-w-[296px] lg:min-w-[396px] w-[28.125%] border-r-0 flex-shrink-0 px-4 py-6 lg:px-6 lg:py-8 bg-white border border-default flex flex-col last:border-r first:rounded-tl-lg first:rounded-bl-lg last:rounded-tr-lg last:rounded-br-lg' -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- render 'article-card',
+            article: block.settings.article,
+            class: article_card_class,
+            cta_text: mod_settings.cta_text,
+            image_wrapper_class: 'rounded-2xl aspect-[348/306]'
+          -%}
+        {%- endfor -%}
+      {%- elsif mod_settings.blog != blank -%}
+        {%- for article in mod_settings.blog.articles -%}
+          {%- render 'article-card',
+            article: article,
+            class: article_card_class,
+            cta_text: mod_settings.cta_text,
+            image_wrapper_class: 'rounded-2xl aspect-[348/306]'
+          -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if mod_settings.title != blank -%}
+      <h3 class="h4 md:h2 absolute left-4 lg:left-6 xl:left-8">{{- mod_settings.title -}}</h3>
+    {%- endif -%}
+
+    {%- render 'carousel',
+      content: carousel_content,
+      title_class: 'h4 lg:h2 top-0 left-4 lg:left-6 xl:left-8',
+      class_buttons: 'right-4 lg:right-8',
+      class: 'carousel-enable px-4 lg:px-6 xl:px-8',
+      class_main: 'pt-[52px] md:pt-[68px]',
+      class_dots: 'hidden'
+    -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Featured articles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Tilte"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text of article card",
+      "default": "View more"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured articles",
+      "category": "Card Grid",
+      "blocks": [
+        {
+          "type": "article"
+        },
+        {
+          "type": "article"
+        },
+        {
+          "type": "article"
+        },
+        {
+          "type": "article"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

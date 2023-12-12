@@ -1,0 +1,21 @@
+{%- if blog.metafields.blog.choose_blog != blank -%}
+  {%- assign linklist = linklists[blog.metafields.blog.choose_blog] -%}
+  <nav class="blog-nav overflow-hidden">
+    {%- capture carousel_contents -%}
+      {%- for link in linklist.links -%}
+        <div class="relative carousel-item snap-start px-4 py-[25px] shrink-0 border-b-4 border-transparent border-solid [&.active]:border-secondary {% if link.current %}active{% endif %}">
+          <a href="{{- link.url -}}" class="text-text-xs text-grey-900 font-bold uppercase hover:text-secondary-hover">{{- link.title -}}</a>
+        </div>
+      {% endfor %}
+    {%- endcapture -%}
+
+    {%- if carousel_contents != blank -%}
+      {%- render 'carousel',
+        class: ' md:justify-center md:items-center carousel-full max-w-full overflow-hidden border-default border-b carousel-enable',
+        content: carousel_contents,
+        class_buttons: '!hidden',
+        class_dots: 'hidden'
+      -%}
+    {%- endif -%}
+  </nav>
+{% endif %}

@@ -1,0 +1,24 @@
+<div class="block md:hidden footer-blocks{% if class %} {{ class }}{% endif %}">
+  {%- capture accordion_items -%}
+    {%- for block in blocks -%}
+      {%- assign tab_title = block.settings.title -%}
+      {%- capture accordion_text -%}
+        {%- for link in linklists[block.settings.footer_menu].links -%}
+          <div class="mb-2">
+            <a href="{{- link.url -}}" class="text-sm text-grey-700 hover:underline hover:text-secondary-hover" title="{{- link.title -}}" target="_self" rel="noopener">
+              {{- link.title -}}
+            </a>
+          </div>
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- render 'accordion-item',
+        title: tab_title,
+        description: accordion_text,
+        class: 'md-max:px-4 border-t-grey-100 last:border-b last:border-solid last:border-b-default',
+        title_class: 'text-base font-bold',
+        enable_wysiwyg: false
+      -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- render 'accordion-list', items: accordion_items, class: 'accordion--default' -%}
+</div>

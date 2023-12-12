@@ -1,0 +1,606 @@
+[
+  {
+    "name": "Account",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Login / Register"
+      },
+      {
+        "type": "image_picker",
+        "id": "login_image",
+        "label": "Login Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "register_image",
+        "label": "Register Image"
+      },
+      {
+        "type": "text",
+        "id": "form_register_id",
+        "label": "ID of form register",
+        "default": "BXtyvr",
+        "info": "Get id from Helium Customer Fields"
+      },
+      {
+        "type": "text",
+        "id": "form_update_id",
+        "label": "ID of form update",
+        "default": "xPtqeG",
+        "info": "Get id from Helium Customer Fields"
+      },
+      {
+        "type": "text",
+        "id": "gender_options",
+        "label": "Options of gender",
+        "default": "Male|Female"
+      },
+      {
+        "type": "header",
+        "content": "Account address"
+      },
+      {
+        "type": "text",
+        "id": "address_note",
+        "label": "Address note",
+        "default": "Please note: We do not ship to PO Boxes or parcel lockers"
+      }
+    ]
+  },
+  {
+    "name": "Apps",
+    "settings": [
+      {
+        "type": "header",
+        "content": "App Integrations",
+        "info": "This theme contains some built-in support for several third-party apps. Please install the apps before enabling the integration here."
+      },
+      {
+        "type": "text",
+        "id": "store_id",
+        "label": "Store ID",
+        "default": "koko-black-update.myshopify.com"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_mini_cart",
+        "label": "Enable Mini Cart",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Cart Thresold"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_threhold_enable",
+        "label": "Enable cart threshold",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_threhold_amount",
+        "label": "Threshold Amount ",
+        "default": "200"
+      }
+    ]
+  },
+  {
+    "name": "Checkouts",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Banner Checkout"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_checkout",
+        "label": "Banner Checkout"
+      },
+      {
+        "type": "header",
+        "content": "Same Day Delivery"
+      },
+      {
+        "type": "text",
+        "id": "same_day_text",
+        "label": "Same Day Delivery Text",
+        "default": "Looking for Next-Day or Express Delivery?"
+      },
+      {
+        "type": "url",
+        "id": "same_day_link",
+        "label": "Same Day Delivery Link"
+      },
+      {
+        "type": "text",
+        "id": "same_day_tooltip",
+        "label": "Same Day Delivery Tooltip",
+        "default": "Unfortunately it’s past our cut-off time. DHL Express Delivery (1-3 days) is available Monday - Friday for orders placed before 1:30PM AEDT"
+      },
+      {
+        "type": "header",
+        "content": "Footer Info"
+      },
+      {
+        "type": "text",
+        "id": "text_footer",
+        "label": "Text Footer"
+      },
+      {
+        "type": "url",
+        "id": "link_text_footer",
+        "label": "Link Text Footer"
+      },
+      {
+        "type": "text",
+        "id": "text_footer_2",
+        "label": "Text Footer 2"
+      },
+      {
+        "type": "url",
+        "id": "link_text_footer_2",
+        "label": "Link Text Footer 2"
+      },
+      {
+        "type": "text",
+        "id": "text_footer_3",
+        "label": "Text Footer 3"
+      },
+      {
+        "type": "url",
+        "id": "link_text_footer_3",
+        "label": "Link Text Footer 3"
+      }
+    ]
+  },
+  {
+    "name": "Localization",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Currency",
+        "info": "This is Currency Code (from ISO 4217)"
+      },
+      {
+        "type": "text",
+        "id": "currency_code_iso_default",
+        "label": "Currency Code Default",
+        "default": "AUD"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Use [this tool](https://realfavicongenerator.net/) to generate your favicon pack. "
+      },
+      {
+        "type": "image_picker",
+        "id": "apple_touch_icon",
+        "label": "Favicon (Apple Touch Devices)",
+        "info": "Upload PNG of 180x180px PNG for users on iOS devices."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon_png_32",
+        "label": "Favicon (32x32)",
+        "info": "Upload PNG of 32x32px."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon_png_16",
+        "label": "Favicon (16x16)",
+        "info": "Upload PNG of 16x16px."
+      },
+      {
+        "type": "color",
+        "id": "color_windows_tile",
+        "label": "Windows Tile Color",
+        "info": "Pick the Windows Tile color for Microsoft Windows devices."
+      },
+      {
+        "type": "color",
+        "id": "color_android_theme",
+        "label": "Android Theme Color",
+        "info": "Pick the Android Theme color for the browser titlebar style."
+      },
+      {
+        "type": "header",
+        "content": "Web App Manifest",
+        "info": "Please upload site.webmanifest to the store files section with remaining icon files. Make sure to update paths to each of the icon files inside of the site.webmanifest file. See: https://developer.mozilla.org/en-US/docs/Web/Manifest"
+      }
+    ]
+  },
+  {
+    "name": "Gift Card",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image_gift_card",
+        "label": "Image Gift Card"
+      }
+    ]
+  },
+  {
+    "name": "Default Image",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "default_image",
+        "label": "Image"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      }
+    ]
+  },
+  {
+    "name": "Newsletter",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Newsletter Popup"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_popup_title",
+        "label": "Title",
+        "default": "Sign up to Convert"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_popup_description",
+        "label": "Description",
+        "default": "Discover more with a little bit of Convert delivered straight to your inbox."
+      },
+      {
+        "type": "text",
+        "id": "newsletter_popup_button_text",
+        "label": "Button Text",
+        "default": "JOIN NOW"
+      },
+      {
+        "type": "image_picker",
+        "id": "newsletter_background",
+        "label": "Newsletter Background"
+      },
+      {
+        "type": "image_picker",
+        "id": "newsletter_background_mobile",
+        "label": "Newsletter Background Mobile"
+      },
+      {
+        "type": "richtext",
+        "id": "text_form",
+        "label": "Text Form"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_email_placeholder",
+        "label": "Email Placeholder",
+        "default": "Email address"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_message_success",
+        "label": "Message Success",
+        "default": "Thank you for subcribing, please check your inbox for your 10% off coupon."
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_message_duplicate",
+        "label": "Message Duplicate",
+        "default": "Email address is subscribed"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_list_id",
+        "label": "Klaviyo List ID"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_public_key",
+        "label": "Klaviyo public key",
+        "default": "Sgwif2"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_bis_url",
+        "label": "Klaviyo Back in stock URL",
+        "default": "https://a.klaviyo.com/onsite/components/back-in-stock/subscribe"
+      }
+    ]
+  },
+  {
+    "name": "Products",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "product_afterpay_enable",
+        "label": "Enable Product Afterpay",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Searchspring API",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Searchspring API",
+        "info": "This is config for Searchspring API"
+      },
+      {
+        "type": "checkbox",
+        "id": "searchspring_enable",
+        "label": "Enable Searchspring",
+        "info": "Product Filter & Search from Searchspring",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "searchspring_site_id",
+        "label": "Searchspring site ID"
+      },
+      {
+        "type": "header",
+        "content": "Searchspring Collection Config",
+        "info": "This is config for Searchspring Collection page"
+      },
+      {
+        "type": "range",
+        "id": "searchspring_products_default_mobile",
+        "label": "Number products show default on Mobile",
+        "min": 12,
+        "max": 60,
+        "step": 12,
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "searchspring_products_default_desktop",
+        "label": "Number products show default on Desktop",
+        "min": 12,
+        "max": 60,
+        "step": 12,
+        "default": 48
+      },
+      {
+        "type": "text",
+        "id": "searchspring_recommendation_cart",
+        "label": "Profile for mini cart",
+        "info": "You may also like",
+        "default": "view-cart"
+      }
+    ]
+  },
+  {
+    "name": "SEO config",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Google Tags Manager"
+      },
+      {
+        "type": "text",
+        "id": "gtm_id",
+        "label": "Google Tags Manager ID",
+        "placeholder": "GTM-xxxxxxx"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social media options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "Tiktok"
+      }
+    ]
+  },
+  {
+    "name": "Social Share",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_enable",
+        "label": "Enable sharing",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_email",
+        "label": "Share via Email",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Global Styles",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Web fonts"
+      },
+      {
+        "type": "text",
+        "id": "google_fonts_uri",
+        "label": "Google Fonts Family",
+        "default": "Inter:400,500,600,700|Muli",
+        "info": "Load fonts from Google Fonts. E.g. if your Google Fonts URL is https://fonts.google.com/selection?selection.family=Raleway:400,500,600,700, then the Google Fonts Family is Raleway:400,500,600,700.",
+        "placeholder": "Poppins:300,400,700|Muli|Poppins:400,600"
+      }
+    ]
+  },
+  {
+    "name": "theme_info",
+    "theme_name": "Gamma",
+    "theme_version": "1.0.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_email": "shopify@convertdigital.com.au"
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Typekit",
+        "info": "Check enable Typekit fonts and input a Typekit ID to import fonts."
+      },
+      {
+        "type": "checkbox",
+        "id": "use_typekit",
+        "label": "Enable Typekit fonts",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "typekit_id",
+        "label": "Typekit ID"
+      },
+      {
+        "type": "header",
+        "content": "Custom Font"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_custom_fonts",
+        "label": "Enable custom fonts",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "headings_font",
+        "label": "Font",
+        "default": "titillium_web_n6"
+      },
+      {
+        "type": "text",
+        "id": "headings_typekit_font_family",
+        "label": "Typekit Font Family",
+        "info": "Prioritized list of one or more font family names and/or generic family names. Font should be included in typekit specifed by 'Typekit ID' field."
+      },
+      {
+        "type": "text",
+        "id": "headings_custom_font_family",
+        "label": "Custom Font Family",
+        "default": "BrownStd"
+      },
+      {
+        "type": "header",
+        "content": "Body Text"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Font",
+        "default": "arimo_n4"
+      },
+      {
+        "type": "text",
+        "id": "body_typekit_font_family",
+        "label": "Typekit Font Family",
+        "info": "Prioritized list of one or more font family names and/or generic family names. Font should be included in typekit specifed by 'Typekit ID' field."
+      },
+      {
+        "type": "text",
+        "id": "body_custom_font_family",
+        "label": "Custom Font Family",
+        "default": "BrownStd"
+      },
+      {
+        "type": "font_picker",
+        "id": "buttons_font",
+        "label": "Font",
+        "default": "titillium_web_n7"
+      },
+      {
+        "type": "text",
+        "id": "buttons_typekit_font_family",
+        "label": "Typekit Font Family",
+        "info": "Prioritized list of one or more font family names and/or generic family names. Font should be included in typekit specifed by 'Typekit ID' field."
+      },
+      {
+        "type": "text",
+        "id": "buttons_custom_font_family",
+        "label": "Custom Font Family",
+        "default": "BrownStd"
+      }
+    ]
+  }
+]

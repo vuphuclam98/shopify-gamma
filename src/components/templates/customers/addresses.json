@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "account_details": {
+      "type": "account-details",
+      "settings": {
+        "account_sidebar": "account-sidebar"
+      }
+    }
+  },
+  "order": [
+    "account_details"
+  ]
+}

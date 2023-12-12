@@ -1,0 +1,33 @@
+{
+  "name": "Cart",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_mini_cart",
+      "label": "Enable Mini Cart",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_notes_enable",
+      "label": "Enable cart notes",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Cart Thresold"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_threhold_enable",
+      "label": "Enable cart threshold",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cart_threhold_amount",
+      "label": "Threshold Amount ",
+      "default": "200"
+    }
+  ]
+}

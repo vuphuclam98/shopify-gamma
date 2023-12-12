@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-404",
+      "settings": {
+        "title": "Page not found",
+        "button_label_fitst": "Back to home"
+      }
+    }
+  },
+  "order": [
+    "template"
+  ]
+}

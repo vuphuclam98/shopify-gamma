@@ -1,0 +1,11 @@
+@layer components {
+  account-address-form {
+    [data-aria-hidden='true'] {
+      @apply hidden;
+    }
+  }
+
+  select.input {
+    background-size: 25px 25px;
+  }
+}

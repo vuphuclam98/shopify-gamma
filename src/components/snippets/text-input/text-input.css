@@ -1,0 +1,79 @@
+@layer base {
+  :root {
+    --height-input: 48px;
+  }
+}
+
+@layer components {
+  .input {
+    @apply relative block w-full rounded border border-solid border-default px-3.5 pb-0.5 pt-5 text-sm text-grey-700 placeholder-transparent transition-[border] duration-300 ease-in-out
+      focus:border-primary focus:shadow-0 focus:invalid:border-primary
+      disabled:border-default disabled:bg-grey-100 disabled:text-grey-500
+      [&.is-invalid]:!border-error;
+  }
+
+  .input-label {
+    @apply pointer-events-none absolute top-1.5 left-3.5 w-[calc(100%-2rem)] bg-transparent text-xs text-grey-500 transition-all duration-300 ease-in-out
+      peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm
+      peer-invalid:text-grey-500 peer-placeholder-shown:peer-invalid:text-grey-500
+      peer-focus:top-1.5
+      peer-focus:w-[calc(100%-2.5rem)]
+      peer-focus:text-xs
+      peer-disabled:bg-grey-100 peer-disabled:after:bg-grey-100 [.is-invalid~&]:!text-error-content;
+  }
+
+  .input[type='date'] {
+    @apply uppercase;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+      -webkit-appearance: none;
+    }
+
+    &::-webkit-date-and-time-value {
+      text-align: left;
+    }
+  }
+
+  .input__icon-wrapper {
+    @apply absolute top-[50%] right-2 z-[2] lg:right-2;
+  }
+
+  .input-error {
+    @apply relative pt-1.5 text-xs text-error-content;
+  }
+
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea {
+    @apply focus:shadow-none;
+  }
+
+  input[type='range'] {
+    &::-webkit-slider-thumb {
+      pointer-events: all;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      pointer-events: all;
+      cursor: pointer;
+    }
+  }
+
+  .is-show-password {
+    @apply before:absolute before:top-[9px] before:left-0 before:h-0.5 before:w-5 before:rotate-[145deg] before:bg-primary-hover;
+  }
+}

@@ -1,0 +1,115 @@
+@layer utilities {
+  .fit {
+    @apply absolute top-0 left-0 h-full w-full;
+  }
+
+  .container {
+    max-width: none;
+  }
+
+  .zoom {
+    @apply scale-[1.03] duration-300 ease-in;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-justify-center {
+    @apply flex justify-center;
+  }
+
+  .flex-items-center {
+    @apply flex items-center;
+  }
+
+  .animation-translate {
+    animation: translate-infinite 100s linear infinite;
+  }
+
+  .animation-slide-in-up {
+    @apply delay-300;
+    animation: slide-in-up 0.3s ease-in-out;
+  }
+
+  .animation-fade-in-up {
+    animation: fade-in-up 0.3s ease-in-out;
+    @apply delay-300;
+  }
+
+  .animation-fade-in-down {
+    animation: fade-in-down 0.3s ease-in-out;
+    @apply delay-300;
+  }
+
+  .no-autocomplete:-webkit-autofill,
+  .no-autocomplete:-webkit-autofill:hover,
+  .no-autocomplete:-webkit-autofill:focus,
+  .no-autocomplete:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    @apply h-2 w-2;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    @apply bg-grey-100;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply border bg-default;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar {
+    @apply h-[124px] w-1;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    @apply bg-grey-400;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    @apply border bg-grey-700;
+  }
+
+  .scrollbar-breadcrumb::-webkit-scrollbar {
+    @apply h-0.5 w-0.5;
+  }
+
+  .account-order-details-inner {
+    &:last-child tr:last-child td {
+      @apply pb-0;
+    }
+  }
+
+  .bypo-select-card {
+    &:nth-of-type(2n) {
+      @apply lg-max:border-r;
+    }
+
+    &:nth-of-type(3n) {
+      @apply lg:border-r;
+    }
+
+    &:nth-of-type(4n) {
+      @apply xl:border-r;
+    }
+  }
+
+  .mini-cart-content {
+    @apply h-[calc(100%-158px)] md:h-[calc(100%-172px)];
+  }
+
+  .tooltip-checkout {
+    & .tooltip-content:after {
+      transform: translateX(-50%) rotate(-45deg);
+    }
+
+    &:hover {
+      .tooltip-content {
+        @apply !block;
+      }
+    }
+  }
+}

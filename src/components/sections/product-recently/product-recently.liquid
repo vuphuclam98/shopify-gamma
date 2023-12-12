@@ -1,0 +1,9 @@
+{%- unless template contains 'gift-card' or product.gift_card? -%}
+  <product-recently handle="{{- product.handle -}}" heading="{{ 'product.general.recently_viewed' | t }}"></product-recently>
+{%- endunless -%}
+
+{%- capture src_url -%}
+  {{- 'section-product-recently.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}

@@ -1,0 +1,207 @@
+{%- comment -%}
+  Parameters
+  * class
+  * image
+  * mobile_width - Max display width of image within mobile breakpoint
+  * xxs_width - Max display width of image within xxs breakpoint
+  * xs_width - Max display width of image within xs breakpoint
+  * s_width - Max display width of image within s breakpoint
+  * sm_width - Max display width of image within sm breakpoint
+  * md_width - Max display width of image within md breakpoint
+  * lg_width - Max display width of image within lg breakpoint
+  * xl_width - Max display width of image within xl breakpoint
+  * xxl_width - Max display width of image within xxl breakpoint
+  * xxxl_width - Max display width of image within xxxl breakpoint
+  * max_width - Max display width of image
+  * object_fit
+{%- endcomment -%}
+
+{%- unless image -%}
+  {%- assign image = settings.default_image -%}
+{%- endunless -%}
+
+{%- liquid
+  comment
+    These variables should match the "screens" breakpoint values from tailwind.config.js
+  endcomment
+  assign break_xxs = 180
+  assign break_xs = 320
+  assign break_s = 480
+  assign break_sm = 640
+  assign break_md = 768
+  assign break_lg = 1080
+  assign break_xl = 1440
+  assign break_xxl = 2160
+  assign break_xxxl = 2880
+
+  assign object_fit = object_fit | default: 'object-cover'
+  assign attr = attr | default: ''
+  assign class = class | default: ''
+  assign loading = loading | default: 'lazy'
+  assign alt = alt | default: ''
+
+  if object_fit == 'contain'
+    assign object_fit_class = 'object-contain'
+  else
+    assign object_fit_class = 'object-cover'
+  endif
+
+  assign query = '(min-width: [width]px)'
+  assign retina_query = '(min-resolution: 200dpi), (-webkit-min-device-pixel-ratio: 2)'
+
+  comment
+    Naural width refers to image display size at 2x resolution
+  endcomment
+  assign natural_width = image.width
+
+  if max_width != blank
+    assign natural_width = natural_width | at_most: max_width
+  endif
+
+  comment
+    Width for default image (mobile fallback)
+  endcomment
+  assign mobile_width = mobile_width | default: break_xxs | at_most: break_xxs | at_most: natural_width
+
+  comment
+    Width and media qeury for "xxs" breakpoint image
+  endcomment
+  assign xxs_width = xxs_width | default: break_xs | at_most: break_xs | at_most: natural_width
+  assign xxs_retina_width = xxs_width | times: 2
+
+  comment
+    Width and media qeury for "xs" breakpoint image
+  endcomment
+  assign xs_width = xs_width | default: break_s | at_most: break_s | at_most: natural_width
+  assign xs_retina_width = xs_width | times: 2
+
+  comment
+    Width and media qeury for "s" breakpoint image
+  endcomment
+  assign s_width = s_width | default: break_sm | at_most: break_sm | at_most: natural_width
+  assign s_retina_width = s_width | times: 2
+
+  comment
+    Width and media qeury for "sm" breakpoint image
+  endcomment
+  assign sm_width = sm_width | default: break_md | at_most: break_md | at_most: natural_width
+  assign sm_retina_width = sm_width | times: 2
+
+  comment
+    Width and media qeury for "md" breakpoint image
+  endcomment
+  assign md_width = md_width | default: break_lg | at_most: break_lg | at_most: natural_width
+  assign md_retina_width = md_width | times: 2
+
+  comment
+    Width and media qeury for "lg" breakpoint image
+  endcomment
+  assign lg_width = lg_width | default: break_xl | at_most: break_xl | at_most: natural_width
+  assign lg_retina_width = lg_width | times: 2
+
+  comment
+    Width and media qeury for "xl" breakpoint image
+  endcomment
+  assign xl_width = xl_width | default: break_xxl | at_most: break_xxl | at_most: natural_width
+  assign xl_retina_width = xl_width | times: 2
+
+  comment
+    Width and media qeury for "xxl" breakpoint image
+  endcomment
+  assign xxl_width = xxl_width | default: break_xxxl | at_most: break_xxxl | at_most: natural_width
+  assign xxl_retina_width = xxl_width | times: 2
+
+  comment
+    Width and media qeury for max image size
+  endcomment
+  assign max_width = max_width | default: natural_width | at_most: natural_width
+  assign max_retina_width = max_width | times: 2
+%}
+
+{%- capture src_set_native -%}
+  {%- if xxs_width > mobile_width -%}
+    {{ image | image_url: width: xxs_width }} {{ xxs_width }}w
+  {%- endif -%}
+  {%- if xs_width > xxs_width -%}
+    ,{{ image | image_url: width: xs_width }} {{ xs_width }}w
+  {%- endif -%}
+  {%- if s_width > xs_width -%}
+    ,{{ image | image_url: width: s_width }} {{ s_width }}w
+  {%- endif -%}
+  {%- if s_width > xs_width -%}
+    ,{{ image | image_url: width: s_width }} {{ s_width }}w
+  {%- endif -%}
+  {%- if sm_width > s_width -%}
+    ,{{ image | image_url: width: sm_width }} {{ sm_width }}w
+  {%- endif -%}
+  {%- if md_width > sm_width -%}
+    ,{{ image | image_url: width: md_width }} {{ md_width }}w
+  {%- endif -%}
+  {%- if lg_width > md_width -%}
+    ,{{ image | image_url: width: lg_width }} {{ lg_width }}w
+  {%- endif -%}
+  {%- if xl_width > lg_width -%}
+    ,{{ image | image_url: width: xl_width }} {{ xl_width }}w
+  {%- endif -%}
+  {%- if xxl_width > xl_width -%}
+    ,{{ image | image_url: width: xxl_width }} {{ xxl_width }}w
+  {%- endif -%}
+  {%- if xxxl_width > xxl_width -%}
+    ,{{ image | image_url: width: xxxl_width }} {{ xxxl_width }}w
+  {%- endif -%}
+  {%- if max_width > xxxl_width -%}
+    ,{{ image | image_url: width: max_width }} {{ max_width }}w
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture src_set_retina -%}
+  {%- if xxs_width > mobile_width -%}
+    {{ image | image_url: width: xxs_retina_width }} {{ xxs_width }}w
+  {%- endif -%}
+  {%- if xs_width > xxs_width -%}
+    ,{{ image | image_url: width: xs_retina_width }} {{ xs_width }}w
+  {%- endif -%}
+  {%- if s_width > xs_width -%}
+    ,{{ image | image_url: width: s_retina_width }} {{ s_width }}w
+  {%- endif -%}
+  {%- if s_width > xs_width -%}
+    ,{{ image | image_url: width: s_retina_width }} {{ s_width }}w
+  {%- endif -%}
+  {%- if sm_width > s_width -%}
+    ,{{ image | image_url: width: sm_retina_width }} {{ sm_width }}w
+  {%- endif -%}
+  {%- if md_width > sm_width -%}
+    ,{{ image | image_url: width: md_retina_width }} {{ md_width }}w
+  {%- endif -%}
+  {%- if lg_width > md_width -%}
+    ,{{ image | image_url: width: lg_retina_width }} {{ lg_width }}w
+  {%- endif -%}
+  {%- if xl_width > lg_width -%}
+    ,{{ image | image_url: width: xl_retina_width }} {{ xl_width }}w
+  {%- endif -%}
+  {%- if xxl_width > xl_width -%}
+    ,{{ image | image_url: width: xxl_retina_width }} {{ xxl_width }}w
+  {%- endif -%}
+  {%- if max_width > xxl_width -%}
+    ,{{ image | image_url: width: max_retina_width }} {{ max_width }}w
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if image -%}
+  <picture {{ attr }}>
+    <source sizes="(min-width: 0rem) 100vw" srcset="{{ src_set_native }}">
+    <source media="{{ retina_query }}" sizes="(min-width: 0rem) 100vw" srcset="{{ src_set_retina }}">
+    <img
+      class="{{ class }} {{ object_fit_class }} lazy"
+      data-src="{{ image | image_url: width: mobile_width }}"
+      width="{{ image.width }}"
+      height="{{ image.height }}"
+      loading="{{ loading }}"
+      alt="{{ alt }}"
+    >
+  </picture>
+{%- else -%}
+  <div class="{{ class }} relative">
+    <span class="absolute inset-0 h-full w-full bg-gradient-to-br from-[#f0f0f0] to-[#9b9b9b]"></span>
+  </div>
+{%- endif -%}

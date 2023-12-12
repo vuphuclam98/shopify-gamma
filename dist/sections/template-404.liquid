@@ -1,0 +1,71 @@
+<div class="flex items-center justify-center text-center">
+  <div class="py-12 lg:py-32">
+    <div class="my-3 text-3xl font-bold text-grey-900 lg:text-4xl">
+      {{- section.settings.title -}}
+    </div>
+    <div class="mb-6 max-w-[646px] px-4">
+      <p class="text-base font-normal text-grey-700">
+        {{- section.settings.subtext_title -}}
+      </p>
+    </div>
+    <div class="md-3 flex items-center justify-center gap-4 lg:my-4">
+      {%- if section.settings.button_url == blank -%}
+        {%- assign shop_url = shop.url -%}
+      {%- else -%}
+        {%- assign shop_url = section.settings.button_url_first -%}
+      {%- endif -%}
+      {%- render 'button', class: 'button-primary', link_text: section.settings.button_label_fitst, link_url: shop_url -%}
+      {%- if section.settings.button_url_second != blank -%}
+        {%- render 'button', class: 'button-outlined', link_text: section.settings.button_label_second, link_url: button_url_second -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Template 404",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "404 Heading Title",
+      "default": "Page not found"
+    },
+    {
+      "type": "text",
+      "id": "subtext_title",
+      "label": "404 Subtitle Text",
+      "default": "We can't seem to find the page you're looking for."
+    },
+    {
+      "type": "text",
+      "id": "button_label_fitst",
+      "label": "Button Label First",
+      "default": "Back to home"
+    },
+    {
+      "type": "url",
+      "id": "button_url_first",
+      "label": "Button URL First"
+    },
+    {
+      "type": "text",
+      "id": "button_label_second",
+      "label": "Button Label Second",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "button_url_second",
+      "label": "Button URL Second"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Template 404"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+@layer components {
+  .checkbox-input__input {
+    @apply h-5 w-5 rounded border-default text-secondary focus:shadow-0;
+
+    &:disabled:checked {
+      @apply border-default;
+
+      background-image: url('data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27%23D4D4D4%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e');
+    }
+
+    &:disabled {
+      @apply bg-grey-100;
+
+      & + .checkbox-input__label {
+        @apply text-grey-500;
+      }
+    }
+  }
+
+  .checkbox-input__label {
+    @apply ml-3 block text-sm tracking-normal text-grey-700;
+  }
+
+  .checkbox-input--checkout {
+    input {
+      @apply border border-solid border-default checked:text-secondary;
+    }
+
+    &.checked + .section__gift-card-message {
+      @apply my-4 h-12 py-[12px] opacity-100;
+    }
+  }
+}
+
+@layer base {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

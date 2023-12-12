@@ -1,0 +1,22 @@
+{%- assign section_settings = section.settings -%}
+{%- render 'plp-translate' -%}
+<div class="border-y border-default p-6 lg:p-12">
+  <h1 class="h4 lg:h2 text-center">
+    {%- if search.terms -%}
+      {{ 'search.search_for_page' | t: terms: search.terms }}
+    {%- else -%}
+      {{ 'search.title' | t }}
+    {%- endif -%}
+  </h1>
+  {%- render 'search-notice' -%}
+</div>
+
+{%- render 'plp-search-native'
+  section_settings: section_settings
+-%}
+
+{%- capture src_url -%}
+  {{- 'section-plp-native.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'important', type: 'defer' -%}

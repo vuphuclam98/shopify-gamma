@@ -1,0 +1,44 @@
+@layer components {
+  .notice-main {
+    @apply relative flex min-h-[48px] items-stretch justify-start
+      rounded border border-solid border-primary bg-white
+      align-middle text-sm text-primary;
+  }
+
+  .notice-main-icon {
+    @apply bg-primary p-2.5 text-white
+    [.notice-main-error_&]:bg-error-content
+    [.notice-main-success_&]:bg-success-content
+    [.notice-main-warning_&]:bg-warning-content
+      [.notice-main-outline_&]:bg-transparent [.notice-main-outline_&]:p-0 [.notice-main-outline_&]:text-primary-hover;
+
+    svg {
+      @apply h-6 w-6;
+    }
+  }
+
+  .notice-main-content {
+    @apply px-4 pt-3 pb-2
+      [.notice-main-outline_&]:bg-transparent [.notice-main-outline_&]:px-0;
+  }
+
+  .notice-main-success {
+    @apply border-success-content text-success-content;
+  }
+
+  .notice-main-error {
+    @apply border-error text-error-content;
+  }
+
+  .notice-main-warning {
+    @apply border-warning-content text-warning-content;
+  }
+
+  .notice-main-outline {
+    @apply gap-2 px-4;
+  }
+
+  .notice-hidden {
+    @apply hidden;
+  }
+}

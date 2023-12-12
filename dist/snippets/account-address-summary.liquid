@@ -1,0 +1,47 @@
+<div class="border rounded p-6 md:p-8 min-h-[220px] {% if default_address %}order-first{% endif %}">
+  {%- if type != 'new_address' -%}
+    <div>
+      {%- if title != blank -%}
+        <h3 class="mb-2 text-base font-bold text-grey-900">{{- title -}}</h3>
+      {%- endif -%}
+      <p class="text-sm tracking-normal text-grey-700">
+        {{ address.first_name }}
+        {{ address.last_name }}
+      </p>
+      {%- unless address.company == blank -%}
+        <p class="text-sm tracking-normal text-grey-700">{{- address.company -}}</p>
+      {%- endunless -%}
+      {%- unless address.address1 == blank and address.address2 == blank -%}
+        <p class="text-sm tracking-normal text-grey-700">
+          {{ address.address1 }}
+          {{ address.address2 }}
+        </p>
+      {%- endunless -%}
+      {%- unless address.city == blank and address.province == blank -%}
+        <p class="text-sm tracking-normal text-grey-700">
+          {{- address.city -}}
+          , {{ address.province_code }}
+          {{ address.zip }}
+        </p>
+      {%- endunless -%}
+      <p class="text-sm tracking-normal text-grey-700">{{- address.country -}}</p>
+    </div>
+    <div class="mt-2">
+      <button
+        class="link mr-4 inline-block"
+        onclick="this.closest('account-addresses').toggleForm('{{- address.id -}}')"
+      >
+        {{- 'customer.addresses.edit' | t -}}
+      </button>
+      <form class="inline" method="post" action="/account/addresses/{{- address.id -}}">
+        <input type="hidden" name="_method" value="delete">
+        <button class="link inline-block" type="submit">{{- 'customer.addresses.delete' | t -}}</button>
+      </form>
+    </div>
+  {%- else -%}
+    <div class="flex-center h-full flex-col">
+      {% render 'icon' with 'icon-location', class: 'w-8 h-8 text-secondary' %}
+      <button class="link mt-2 normal-case" onclick="this.closest('account-addresses').toggleForm('new')">{{- 'customer.addresses.add_new' | t -}}</button>
+    </div>
+  {%- endif -%}
+</div>

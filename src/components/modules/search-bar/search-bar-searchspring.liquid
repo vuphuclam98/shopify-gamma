@@ -1,0 +1,13 @@
+<script>
+  var SearchBarConfig = {
+    translates: {
+      didYouMean: {{ 'search.did_you_mean' | t | json }},
+      suggestionForSearch: {{ 'search.suggestion_for_search' | t | json }},
+    }
+  }
+</script>
+
+<search-bar
+  value="{{ search.terms | escape }}"
+  placeholder="{{- 'general.search.placeholder' | t -}}"
+></search-bar>

@@ -1,0 +1,185 @@
+<div class="hero">
+  {%- assign mod_settings = section.settings -%}
+  {%- assign url = null -%}
+  {%- capture content -%}
+    <div class="container h-full flex pt-9 pb-8 lg:py-10 md:px-16 xl:px-20 {{ mod_settings.content_position_vertical }} justify-center lg:{{ mod_settings.content_position_horizontal }}" >
+      {%- unless mod_settings.enable_background -%}
+        {%- assign content_inner_class = '!bg-transparent' -%}
+      {%- else -%}
+        {%- assign content_inner_class = 'px-8 lg:px-10 py-7 lg:py-9' -%}
+      {%- endunless -%}
+      {%- case mod_settings.content_position_horizontal -%}
+        {%- when 'justify-start' -%}
+          {%- assign content_align_class = 'lg:text-left' -%}
+        {%- when 'justify-center' -%}
+          {%- assign content_align_class = 'text-center' -%}
+        {%- when 'justify-end' -%}
+          {%- assign content_align_class = 'lg:text-right' -%}
+      {%- endcase -%}
+
+      <div class="content-inner text-center {{ content_inner_class }} {{ content_align_class }}" style="background-color: {{ mod_settings.background_color }};">
+        {%- if mod_settings.title != blank -%}
+          <h2 class="text-3xl font-bold text-white lg:text-4xl relative">{{- mod_settings.title -}}</h2>
+        {%- endif -%}
+        {%- if  mod_settings.subtitle != blank -%}
+          <p class="mt-4 text-white">{{- mod_settings.subtitle -}}</p>
+        {%- endif -%}
+        {%- assign url = mod_settings.button_url -%}
+        {%- if mod_settings.button_url != blank and mod_settings.button_label != blank -%}
+          <a href="{{ mod_settings.button_url }}" class="mt-4 md:mt-6 {{ mod_settings.button_style }} [&+&]:ml-3 pointer-events-auto">{{- mod_settings.button_label -}}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endcapture -%}
+
+  {%- if mod_settings.use_video -%}
+    {%- assign banner_class = 'block relative aspect-[1/1] md:aspect-[1440/596]' -%}
+  {%- endif -%}
+
+  {%- render 'hero',
+    image: mod_settings.image_desktop,
+    image_mobile: mod_settings.image_mobile,
+    use_video: mod_settings.use_video,
+    video_type: mod_settings.video_type,
+    video_url: mod_settings.video_url,
+    video_type_mobile: mod_settings.video_type_mobile,
+    video_url_mobile: mod_settings.video_url_mobile,
+    class: 'aspect-[345/316] md:aspect-[720/366] lg:aspect-[976/366] xl:aspect-[1376/524]',
+    content: content,
+    content_class: 'absolute fit pointer-events-none',
+    url: url,
+    video_autoplay: true,
+    image_class: ' !relative',
+    image_mobile_class: ' !relative',
+    banner_class: banner_class
+  -%}
+</div>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Give the gift of Convert"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Give the gift of Convert"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_background",
+      "label": "Enable content background",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Content's background color",
+      "default": "#6B8761"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button's label",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button's URL"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button's style",
+      "options": [
+        { "value": "button-outlined-hero", "label": "Filled in white" },
+        { "value": "button-outlined-white", "label": "Outline white" }
+      ],
+      "default": "button-outlined-white"
+    },
+    {
+      "type": "select",
+      "id": "content_position_vertical",
+      "label": "Position of content vertically",
+      "options": [
+        { "value": "items-start", "label": "Top" },
+        { "value": "items-center", "label": "Center" },
+        { "value": "items-end", "label": "Bottom" }
+      ],
+      "default": "items-center"
+    },
+    {
+      "type": "select",
+      "id": "content_position_horizontal",
+      "label": "Position of content horizontally",
+      "options": [
+        { "value": "justify-start", "label": "Left" },
+        { "value": "justify-center", "label": "Center" },
+        { "value": "justify-end", "label": "Right" }
+      ],
+      "default": "justify-center"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Image desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_video",
+      "label": "Use background video",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "video_type",
+      "label": "Video's type desktop",
+      "options": [
+        { "value": "mp4", "label": "MP4" },
+        { "value": "youtube", "label": "Youtube" },
+        { "value": "vimeo", "label": "Vimeo" }
+      ],
+      "default": "mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video's url desktop"
+    },
+    {
+      "type": "select",
+      "id": "video_type_mobile",
+      "label": "Video's type mobile",
+      "options": [
+        { "value": "mp4", "label": "MP4" },
+        { "value": "youtube", "label": "Youtube" },
+        { "value": "vimeo", "label": "Vimeo" }
+      ],
+      "default": "mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_url_mobile",
+      "label": "Video's url mobile"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "category": "Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,156 @@
+@layer components {
+  .wysiwyg--footer-bottom {
+    & a {
+      @apply hover:text-secondary-hover;
+    }
+  }
+
+  .wysiwyg--seo-text {
+    & p {
+      @apply inline text-sm font-normal text-grey-700 md:text-base;
+    }
+
+    & span {
+      @apply link text-grey-500 no-underline;
+    }
+  }
+
+  .wysiwyg--image-text {
+    & p {
+      @apply mb-2.5 text-base font-normal text-grey-700 last:mb-0;
+
+      & strong {
+        @apply font-bold text-grey-900;
+      }
+    }
+
+    & a,
+    & span {
+      @apply text-base text-grey-500;
+    }
+
+    & strong {
+      @apply mb-2.5 block;
+    }
+
+    &.read-more p:nth-last-child(-n + 2) {
+      display: inline;
+    }
+
+    &.read-more.is-active p:nth-last-child(-n + 2) {
+      display: block;
+    }
+  }
+
+  .wysiwyg-product {
+    & p {
+      @apply mb-2;
+    }
+
+    & table {
+      @apply w-full;
+    }
+  }
+
+  .wysiwyg--product-description {
+    & .read-more-button {
+      @apply underline;
+    }
+
+    & p {
+      @apply inline;
+    }
+  }
+
+  .wysiwyg--afterpay {
+    & p {
+      @apply relative pl-6 text-sm text-grey-700 before:absolute before:left-2 before:content-['\2022'];
+    }
+  }
+
+  .wysiwyg--banner {
+    & p {
+      @apply text-xl;
+    }
+  }
+
+  .wysiwyg--article {
+    & p {
+      @apply mb-2.5 last:mb-0;
+    }
+
+    & ul {
+      @apply list-disc pl-6 text-base;
+
+      & li {
+        @apply mb-2.5 last:mb-0;
+      }
+    }
+
+    & table {
+      @apply my-6 text-left;
+
+      & thead {
+        & th {
+          @apply pb-2.5 text-base font-bold text-grey-900;
+        }
+      }
+
+      & tbody {
+        & td {
+          &:first-child {
+            @apply pr-1;
+          }
+
+          &:last-child {
+            @apply pl-1;
+          }
+        }
+
+        & p {
+          @apply text-base font-normal text-grey-700;
+        }
+      }
+
+      & p:last-child {
+        @apply mb-0;
+      }
+    }
+  }
+
+  .wysiwyg--article-description {
+    & p {
+      @apply mt-4 text-xl first:mt-0;
+    }
+
+    & img {
+      @apply mx-auto;
+    }
+  }
+
+  .wysiwyg--image-with-text {
+    @apply text-white;
+
+    & p {
+      @apply text-base font-normal text-white;
+
+      & + p {
+        @apply mt-4;
+      }
+    }
+
+    & > span {
+      @apply link text-white underline;
+    }
+  }
+
+  .wysiwyg--text {
+    & * {
+      @apply !text-base md:!text-lg;
+    }
+
+    & p {
+      @apply mb-2.5 font-normal text-grey-700 last:mb-0;
+    }
+  }
+}

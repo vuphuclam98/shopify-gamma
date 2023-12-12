@@ -1,0 +1,24 @@
+{%- liquid
+  assign class = class | append: 'relative border-t featured-articles border-default'
+  assign content = content
+  assign title = title
+-%}
+
+{%- if content != blank -%}
+  <div class="{{ class }}">
+    {%- if title != blank -%}
+      <div class="container">
+        <h3 class="absolute top-5 z-[1] text-xl font-bold text-grey-900 md:top-6 lg:top-8 lg:text-3xl">{{- title -}}</h3>
+      </div>
+    {%- endif -%}
+
+    {%- render 'carousel',
+      content: content,
+      title_class: 'h4 lg:h2 top-0 left-4 lg:left-6 xl:left-8',
+      class_buttons: 'top-3 md:top-6 lg:top-8 right-4 lg:right-8',
+      class: 'carousel-enable',
+      class_main: 'pt-[64px] md:pt-[84px] lg:pt-[100px]',
+      class_dots: 'hidden'
+    -%}
+  </div>
+{%- endif -%}

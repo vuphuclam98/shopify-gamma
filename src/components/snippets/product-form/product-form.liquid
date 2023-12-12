@@ -1,0 +1,34 @@
+<script>
+  var productState = {
+    initProduct: {{ product | json }},
+    initVariant: {{ product.selected_or_first_available_variant | json }},
+    isGiftCard: {% if template contains 'gift-card' or product.gift_card? %}true{%- else -%}false{% endif %},
+    afterpayEnable: {{ settings.product_afterpay_enable | json }}
+  }
+
+  var pdpState = {
+    translates: {
+      notifyMe: {{ 'product.general.notify_me' | t | json }},
+      notifyMeWhenAvailable: {{ 'product.general.notify_me_when_available' | t | json }},
+      subtextNotifyMe: {{ 'product.general.subtext_notify_me' | t | json }},
+      comingSoon: {{ 'product.general.coming_soon' | t | json }},
+      soldOut: {{ 'product.general.sold_out' | t | json }},
+      buyNowPayLate: {{ 'product.general.buy_now_pay_late' | t | json }},
+      info: {{ 'product.general.info' | t | json }}
+    }
+  }
+
+  function assignVariantMetafields() {
+    if (!productState || !productState.initProduct || !productState.initProduct.variants || !productState.initProduct.variants.length) {
+      return
+    }
+    {% for variant in product.variants %}
+      if (productState.initProduct.variants[{{- forloop.index0 -}}]) {
+        productState.initProduct.variants[{{- forloop.index0 -}}].metafields = {% render 'product-variant-json-meta', variant: variant %}
+      }
+    {% endfor %}
+  }
+  assignVariantMetafields()
+</script>
+
+<product-form></product-form>

@@ -1,0 +1,30 @@
+{%- comment -%}
+  Render a notice
+  Accepts:
+    - content: {String}
+    - class: {String}
+    - content_class: {String}
+    - btn_close_class: {String}
+{%- endcomment -%}
+
+{%- liquid
+  assign icon = icon | default: null
+  assign content = content | default: null
+  assign class = class
+  assign content_class = content_class
+  assign btn_close_class = btn_close_class
+  assign auto_close_notice = auto_close_notice | default: false
+  assign enable_icon = enable_icon | default: true, allow_false: true
+-%}
+{%- if content != blank -%}
+  <notice-main class="notice-main {{ class }}{% if auto_close_notice %} js-auto-close-notice{% endif %}">
+    {%- if icon != blank and enable_icon -%}
+      <button type="button" class="notice-main-icon {{ btn_close_class }}">
+        {%- render 'icon' with icon -%}
+      </button>
+    {%- endif -%}
+    <div class="notice-main-content {{ content_class }}">
+      {{- content -}}
+    </div>
+  </notice-main>
+{%- endif -%}

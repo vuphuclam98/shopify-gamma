@@ -1,0 +1,21 @@
+<wishlist-count class="{{ class }}">
+  {%- if customer -%}
+    {%- assign wishlist_url = '/account?view=favourites' -%}
+  {%- else -%}
+    {%- assign wishlist_url = '/pages/favourites' -%}
+  {%- endif -%}
+  <a href="{{ wishlist_url }}" class="swym-wishlist relative hidden md:block">
+    {%- render 'icon' with 'icon-heart' -%}
+    <span
+      class="js-wishlist-count absolute top-3 -right-1 flex h-[18px] w-[18px] items-center justify-center rounded-full bg-secondary text-xs font-bold leading-3 text-white opacity-0"
+    ></span>
+  </a>
+</wishlist-count>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-wishlist-count.js' | asset_url -}}
+  {%- endcapture -%}
+
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

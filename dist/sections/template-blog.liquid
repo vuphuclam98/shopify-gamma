@@ -1,0 +1,61 @@
+{% liquid
+  assign image = blog.metafields.blog.image | first
+  assign image_mobile = blog.metafields.blog.image_mobile | first
+  assign image_link = blog.metafields.blog.image_link
+  assign title = blog.metafields.blog.title
+  assign description = blog.metafields.blog.description
+  assign limit = blog.metafields.blog.blog_limit | default: 1 | plus: 0
+
+  assign class_article = 'p-4 pt-6 pb-6 border-default border border-t-0 border-l-0 flex flex-col md-max:border-r-0 md:w-1/3 lg:p-6 lg:pt-8 lg:pb-8'
+%}
+
+{%- capture hero_content -%}
+  {%- if title != blank or description != blank -%}
+    <div class="text-center">
+      {%- if title != blank -%}
+        <h3 class="text-2xl text-white font-bold lg:text-4xl">{{- title -}}</h3>
+      {%- endif -%}
+      {%- if description != blank -%}
+        <div class="mt-1.5 text-white lg:text-lg">{{- description -}}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- render 'breadcrumbs', class: 'py-2 lg:py-3.5', item_current_class: 'text-xs' -%}
+
+{%- if image != blank or image_mobile != blank -%}
+  {%- render 'hero',
+    class: 'aspect-[1/1] md:aspect-[1024/400] xl:aspect-[1440/480] overflow-hidden',
+    image_acf: image,
+    image_mobile_acf: image_mobile,
+    url: image_link,
+    content_class: 'p-8 absolute w-full max-w-[344px] !h-fit pt-7 !top-auto bottom-4 bg-secondary -translate-x-1/2 md:p-10 md:pt-9 md:!top-1/2 !left-1/2 md:-translate-y-1/2 md:max-w-[550px]',
+    content: hero_content
+  -%}
+{%- endif -%}
+{%- render 'blog-nav' -%}
+
+<section class="blog">
+  {% paginate blog.articles by limit %}
+    <div class="md:flex md:flex-wrap">
+      {% for article in blog.articles %}
+        {%- if blog.articles_count <= 3 and limit >= 2 -%}
+          {%- assign class_article = class_article | append: ' border-b-0' -%}
+        {%- endif -%}
+        {%- render 'article-card',
+          article: article,
+          image_wrapper_class: 'relative rounded-2xl aspect-[344/244] aspect-[432/306]',
+          class: class_article,
+          cta_class: 'button-outlined w-fit mt-6 lg:mt-12'
+        -%}
+      {% endfor %}
+    </div>
+    {%- render 'pagination',
+      pagination: paginate,
+      class: 'my-8 lg:my-[50px]',
+      class_pagination_next: 'w-[18px] h-[18px] text-grey-500',
+      class_pagination_previous: 'w-[18px] h-[18px] text-grey-500 rotate-180'
+    -%}
+  {% endpaginate %}
+</section>

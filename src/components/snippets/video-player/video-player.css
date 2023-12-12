@@ -1,0 +1,8 @@
+@layer components {
+  video-player {
+    & iframe,
+    & video {
+      @apply h-full w-full;
+    }
+  }
+}

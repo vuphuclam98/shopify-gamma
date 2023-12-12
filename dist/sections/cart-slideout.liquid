@@ -1,0 +1,20 @@
+<cart-slideout>
+  <modal-dialog data-target="MiniCart" id="MiniCartSlideout" data-type="slideout" class="modal-dialog-mini-cart" data-scroll-target=".js-mini-cart-content">
+    <div class="modal-dialog-content js-content-modal-dialog w-[336px] md:w-[400px]">
+      <div class="relative flex items-center justify-between border-b border-default px-4 py-3 text-center md:py-5 md:px-6">
+        <button type="button" class="js-close-modal-dialog absolute left-4 top-1/2 -translate-y-1/2 md:left-6" aria-label="close mini cart">
+          {%- render 'icon' with 'icon-close-outline', class: 'w-4 h-4 text-grey-500' -%}
+        </button>
+        <h1 class="flex-auto text-lg font-bold text-grey-900">{{- 'general.cart.heading' | t -}}</h1>
+        <a href="/cart" class="link absolute right-4 top-1/2 -translate-y-1/2 text-grey-500 md:right-6">{{- 'general.cart.view_bag' | t -}}</a>
+      </div>
+      {%- render 'mini-cart' -%}
+    </div>
+  </modal-dialog>
+</cart-slideout>
+
+{%- capture src_url -%}
+  {{- 'section-cart-slideout.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, type: 'defer' -%}

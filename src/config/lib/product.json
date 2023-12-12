@@ -1,0 +1,11 @@
+{
+  "name": "Products",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "product_afterpay_enable",
+      "label": "Enable Product Afterpay",
+      "default": true
+    }
+  ]
+}

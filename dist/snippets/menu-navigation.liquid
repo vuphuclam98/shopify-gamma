@@ -1,0 +1,188 @@
+{%- liquid
+  assign main_menu_linklist = main_menu_linklist | default: null
+  assign blocks = blocks | default: null
+  assign menu_nav_item_class = "inline-flex items-center font-bold whitespace-nowrap lg:whitespace-pre-wrap text-grey-900 text-sm py-5 uppercase relative after:content-[''] after:absolute after:w-[0] after:transition-[width] after:left-1/2 after:-translate-x-1/2 after:bottom-[13px] after:bg-grey-700 after:h-[1px] [&.hover]:after:w-full after:duration-[400ms]"
+  assign menu_list_class = 'block text-sm text-grey-900 mb-2 link no-underline hover:underline w-fit'
+-%}
+
+<menu-navigation class="relative block [&.is-active>.header-sticky>.menu-overlay]:opacity-100">
+  <div class="header-sticky js-header-sticky top-0 z-30 hidden w-full border-b border-default bg-white md:block">
+    <div class="container">
+      <div class="flex items-center justify-between [.is-sticky_&]:xl:py-[9px]">
+        <div class="hidden text-left [.is-sticky_&]:xl:block">
+          {%- render 'logo', class: 'w-[226px]' -%}
+        </div>
+        <div class="mx-auto text-center">
+          <nav class="md:flex-center js-menu-navigation hidden">
+            {%- for link in main_menu_linklist -%}
+              {%- if link.links != blank -%}
+                <div class="menu-item hover:menu-item-line px-4 xl:px-3 2xl:px-4" data-dropdown>
+                  <a
+                    href="{{ link.url }}"
+                    class="{{ menu_nav_item_class }} relative cursor-default [&.hover>svg]:rotate-180 [&.hover+div]:visible [&.hover+div]:opacity-100"
+                  >
+                    {{- link.title -}}
+                    {%- render 'icon' with 'icon-chevron-down-outline', class: 'w-4 h-4 ml-0.5 transition text-grey-700 duration-500' -%}
+                  </a>
+                  {%- for block in blocks -%}
+                    {%- if block.settings.title == link.title and block.settings.simple_menu -%}
+                      <div class="top-menu-navigation invisible absolute z-[11] w-[224px] -translate-x-6 bg-white py-5 px-6 opacity-0 transition-opacity delay-100 duration-[400ms]">
+                        {%- for child_link in link.links -%}
+                          {%- liquid
+                            if child_link.levels == 0
+                              assign menu_title_class = menu_list_class
+                            else
+                              assign menu_title_class = 'mb-4 md:text-sm uppercase text-grey-900 text-sm font-bold md:tracking-[0.5px] pointer-events-none'
+                            endif
+                          -%}
+                          <div class="text-left">
+                            <a
+                              href="{{ child_link.url }}"
+                              class="{% if forloop.last and child_link.levels == 0 %}mb-0 {% endif %}{{ menu_title_class }} block w-fit text-left hover:underline"
+                            >
+                              {{- child_link.title -}}
+                            </a>
+                            {%- for item in child_link.links -%}
+                              <a href="{{ item.url }}" class="{% if forloop.last %}mb-0 {% endif %}{{ menu_list_class }}">{{ item.title }}</a>
+                            {%- endfor -%}
+                          </div>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                <div class="menu-item hover:menu-item-line px-4 xl:px-3 2xl:px-4" data-dropdown>
+                  <a href="{{- link.url -}}" class="{{ menu_nav_item_class }}">{{- link.title -}}</a>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </nav>
+        </div>
+        <div class="text-right [.is-sticky_&]:xl:block">
+          <div class="flex items-center justify-end gap-3 lg:gap-4 xl:ml-2.5 2xl:gap-6">
+            <div class="js-search-bar relative overflow-hidden">
+              {%- render 'search-bar-custom' -%}
+            </div>
+            {%- if settings.location_url -%}
+              <a href="{{- settings.location_url -}}" title="Location">
+                {%- render 'icon' with 'icon-location' -%}
+              </a>
+            {%- endif -%}
+            {%- if shop.customer_accounts_enabled -%}
+              <a href="{{- routes.account_url -}}" title="{{- 'customer.account.title' | t -}}" class="relative hidden md:block">
+                {%- render 'icon' with 'icon-person' -%}
+                {%- if customer -%}
+                  <span class="absolute top-1 -right-1 text-info-content lg:top-3">
+                    {%- render 'icon' with 'icon-success', class: 'w-[18px] h-[18px]' -%}
+                  </span>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+            {%- if settings.enable_wishlist -%}
+              {%- render 'wishlist-count' -%}
+            {%- endif -%}
+            {%- render 'cart-count', id_button: 'MiniCart' -%}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="menu-overlay top-menu-navigation pointer-events-none absolute left-0 h-screen w-full bg-dark-overlay opacity-0 transition-opacity delay-100 duration-[400ms]"
+    ></div>
+    <div
+      class="top-menu-navigation max-height-menu-navigation scrollbar-hide js-nav-dropdown absolute left-0 z-[11] w-full overflow-auto bg-white transition-[height] delay-100 duration-[400ms]"
+      style="height: 0px;"
+    >
+      {%- for link in main_menu_linklist -%}
+        <div class="js-nav-dropdown-item hidden w-full [.is-sticky_&]:border-t [.is-sticky_&]:border-default">
+          {%- assign is_simple_menu = false -%}
+          {%- for block in blocks -%}
+            {%- if block.settings.title == link.title and block.settings.simple_menu -%}
+              {%- assign is_simple_menu = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if link.links.size > 0 and is_simple_menu == false -%}
+            <div class="overflow-hidden pt-[30px] pb-9">
+              <div class="container flex justify-start">
+                {%- for block in blocks -%}
+                  {%- if block.settings.title == link.title and block.settings.featured_navigation != blank -%}
+                    <div class="mr-4 w-[197px] shrink-0 border-r border-default pr-4 xl:mr-8 xl:pr-8">
+                      <p class="mb-4 block w-fit text-left text-base text-sm font-bold uppercase text-grey-900">
+                        {{ 'menu_slideout.featured' | t }}
+                      </p>
+                      {%- for item in linklists[block.settings.featured_navigation].links -%}
+                        {%- assign item_title_handle = item.title | handle -%}
+                        <a href="{{ item.url }}" class="{{ menu_list_class }}{% if item_title_handle == 'sale' %} text-error-content hover:text-error-content{% endif %}">
+                          {{- item.title -}}
+                        </a>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+                <div class="relative flex justify-between gap-6">
+                  <div class="{% if link.levels > 1 %}grid grid-cols-[repeat(3,164px)] gap-4 xl:gap-8{% endif %}">
+                    {%- for child_link in link.links -%}
+                      {%- liquid
+                        if child_link.levels == 0
+                          assign menu_title_class = menu_list_class
+                        else
+                          assign menu_title_class = 'mb-4 text-sm uppercase md:tracking-[0.5px] text-grey-900 font-bold pointer-events-none'
+                        endif
+                      -%}
+                      <div class="text-left">
+                        <a
+                          href="{{ child_link.url }}"
+                          class="{% if forloop.last and child_link.levels == 0 %}mb-0 {% endif %}{{ menu_title_class }} block w-fit text-left hover:underline"
+                        >
+                          {{- child_link.title | split: ']' | last -}}
+                        </a>
+                        {%- for item in child_link.links -%}
+                          <a href="{{ item.url }}" class="md:text-grey-700 {% if forloop.last %}mb-0 {% endif %}{{ menu_list_class }}">{{ item.title }}</a>
+                        {%- endfor -%}
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+                {%- if settings.cta_image_1 != blank or settings.cta_image_2 != blank -%}
+                  <div class="js-menu-navigation-banner ml-auto flex w-full flex-1 justify-end gap-8 xl:grid-cols-2" data-count-banner="">
+                    {%- for i in (1..2) -%}
+                      {%- capture cta_image_settings -%}cta_image_{{ i }}{%- endcapture -%}
+                      {%- capture cta_text_settings -%}cta_text_{{ i }}{%- endcapture -%}
+                      {%- capture cta_url_settings -%}cta_url_{{ i }}{%- endcapture -%}
+                      {%- assign cta_image = settings[cta_image_settings] -%}
+                      {%- assign cta_text = settings[cta_text_settings] -%}
+                      {%- assign cta_url = settings[cta_url_settings] | default: '#' -%}
+
+                      {%- if cta_image != blank -%}
+                        <a href="{{ cta_url }}" class="nav-banner-item block w-full max-w-[264px] overflow-hidden rounded-xl">
+                          <div class="relative aspect-[264/210] overflow-hidden rounded-xl">
+                            {%- render 'image', image: cta_image, class: 'fit transition duration-500 ease-in-out transform hover:scale-105' -%}
+                          </div>
+                          {%- if cta_text != blank -%}
+                            <div class="mt-4 flex items-center justify-start">
+                              <p class="text-left text-base font-normal leading-[26px] tracking-normal text-grey-900 hover:underline">{{ cta_text }}</p>
+                              {%- render 'icon' with 'icon-chevron-forward-outline', class: 'w-[18px] h-[18px] ml-2' -%}
+                            </div>
+                          {%- endif -%}
+                        </a>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</menu-navigation>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-menu-navigation.js' | asset_url -}}
+  {%- endcapture -%}
+
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

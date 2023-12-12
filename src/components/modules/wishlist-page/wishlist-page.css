@@ -1,0 +1,235 @@
+.wishlist {
+  & * {
+    @apply !font-sans;
+  }
+
+  & .swym-wishlist-detail-separator,
+  & .swym-wishlist-detail-content {
+    @apply !hidden;
+  }
+
+  & .swym-empty-wishlist-container {
+    @apply flex min-h-[288px] w-full flex-col items-center rounded border-2 border-dashed border-default p-8 md:p-16;
+
+    & .swym-empty-wishlist-title {
+      @apply hidden;
+    }
+
+    & .swym-empty-wishlist-text {
+      @apply max-w-[496px] text-center text-sm font-normal tracking-normal text-grey-700;
+    }
+
+    & .swym-empty-wishlist-continue-btn {
+      @apply mt-6 mb-0 w-full rounded border border-solid border-default bg-transparent px-6 pt-[13px]
+      pb-[11px] text-center text-sm uppercase text-grey-900 transition-colors duration-300 ease-in-out hover:border-primary-hover hover:bg-primary-hover hover:text-white md:w-fit;
+    }
+  }
+
+  & .swym-simple-wishlist-page {
+    @apply max-w-none;
+  }
+
+  & .swym-wishlist-container-title-bar {
+    @apply !hidden;
+  }
+
+  & .swym-wishlist-detail-header {
+    @apply !mb-4 !border-none !p-0;
+
+    & .swym-wishlist-main-title {
+      @apply !ml-0 mr-0 !block text-xl font-bold !tracking-normal !text-grey-900 lg:text-2xl;
+    }
+
+    & + .swym-wishlist-detail-separator {
+      @apply hidden;
+    }
+
+    & .swym-wishlist-context-menu {
+      @apply static ml-5 !h-6 !w-6 outline-none before:content-none;
+
+      background: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%20%20%3Cpath%20fill%3D%22gray%22%20d%3D%22M12%2013.5a1.5%201.5%200%201%200%200-3%201.5%201.5%200%200%200%200%203ZM19.5%2013.5a1.5%201.5%200%201%200%200-3%201.5%201.5%200%200%200%200%203ZM4.5%2013.5a1.5%201.5%200%201%200%200-3%201.5%201.5%200%200%200%200%203Z%22%2F%3E%0A%3C%2Fsvg%3E')
+        no-repeat center;
+
+      & .swym-wishlist-context-menu-bg {
+        @apply bg-dark-overlay;
+      }
+    }
+  }
+
+  & .swym-wishlist-grid {
+    @apply grid max-w-none grid-cols-2 gap-x-6 gap-y-4 p-0 md:gap-y-6 lg:grid-cols-4;
+
+    & .swym-wishlist-item {
+      @apply !m-0 hidden w-full cursor-default border-none;
+
+      & .swym-is-button {
+        @apply cursor-default;
+      }
+
+      &.swym-wishlist-item-active {
+        @apply flex;
+      }
+
+      & .swym-delete-btn {
+        @apply top-2 right-2 h-8 w-8 cursor-pointer;
+
+        background: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2032%2032%22%3E%0A%20%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23F6F6F6%22%20rx%3D%2216%22%2F%3E%0A%20%20%3Cpath%20stroke%3D%22gray%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.8%22%20d%3D%22M21.333%2021.333%2010.667%2010.667M21.333%2010.667%2010.667%2021.333%22%2F%3E%0A%3C%2Fsvg%3E')
+          no-repeat center;
+
+        & .swym-icon {
+          @apply hidden;
+        }
+      }
+
+      & .swym-wishlist-image-wrapper {
+        @apply h-auto max-h-fit cursor-pointer;
+      }
+
+      & .swym-wishlist-image {
+        @apply aspect-1 object-cover;
+      }
+
+      & .swym-title {
+        @apply m-0 mt-4 mb-auto cursor-pointer overflow-visible whitespace-normal text-sm font-bold tracking-normal text-grey-900 md:text-base;
+      }
+
+      & .swym-variant-title {
+        @apply m-0 mt-1.5 cursor-auto text-xs font-medium leading-[18px] text-grey-500 md:text-sm;
+      }
+
+      & .swym-product-price {
+        @apply mt-4 cursor-auto p-0;
+
+        & .swym-product-final-price,
+        & .swym-product-original-price {
+          @apply text-sm font-normal leading-5 text-grey-900 md:text-base;
+        }
+
+        & .swym-product-original-price {
+          @apply text-grey-500;
+        }
+      }
+
+      & .swym-add-to-cart-btn {
+        @apply relative mt-3 mb-0 h-[42px] w-full rounded border border-solid border-default bg-transparent px-6 py-2.5 text-center text-sm uppercase text-transparent transition-colors duration-300 ease-in-out before:absolute before:inset-0 before:flex before:items-center before:justify-center before:text-grey-900 before:content-['View_detail'] hover:border-primary-hover hover:bg-primary-hover hover:before:text-white;
+
+        &.swym-disabled {
+          @apply pointer-events-auto cursor-pointer !bg-transparent hover:border-primary-hover hover:!bg-primary-hover;
+        }
+      }
+    }
+  }
+}
+
+.swym-ui-component {
+  & * {
+    @apply !font-sans;
+  }
+
+  & .swym-modal-bg {
+    @apply !bg-dark-overlay;
+  }
+
+  & .swym-modal {
+    & .swym-share-wishlist-modal-dialog,
+    & .swym-clear-wishlist-modal-dialog {
+      @apply w-[344px] px-8 py-8 md:w-[460px] md:px-[60px] md:py-[60px];
+
+      & .swym-share-wishlist-input-container {
+        @apply mb-0 pb-0;
+      }
+
+      & .swym-text-content {
+        @apply text-xs text-grey-700;
+      }
+
+      & .swym-close-btn {
+        @apply top-6 right-6 h-5 w-5 text-center before:text-[13px] before:content-['\e905'];
+      }
+
+      & .swym-text-heading {
+        @apply mb-4 text-xl font-bold normal-case text-grey-900 lg:text-2xl;
+      }
+
+      & .swym-input-container {
+        @apply !mb-4;
+
+        & .swym-input-label {
+          @apply hidden;
+        }
+
+        & .swym-input {
+          @apply block rounded border-default py-[13px] text-sm tracking-normal text-grey-700 outline-none placeholder:text-grey-500 focus:border-[1px] focus:border-grey-900;
+        }
+
+        & .error-msg {
+          @apply relative pt-1.5 pb-0 text-xs not-italic tracking-normal text-error-content;
+        }
+      }
+
+      & .swym-info-grey,
+      & br {
+        @apply hidden;
+      }
+
+      & .swym-share-email-button-container {
+        @apply mt-4;
+
+        & .swym-share-wishlist-email-btn {
+          @apply mb-0 w-full rounded bg-primary py-4 text-sm font-bold hover:bg-primary-hover disabled:bg-grey-100 disabled:text-grey-500;
+        }
+      }
+
+      & .swym-clear-wishlist-btn {
+        @apply mb-4 w-full rounded bg-primary py-4 text-sm font-bold hover:bg-primary-hover;
+      }
+
+      & .swym-cancel-clear-wishlist-btn {
+        @apply mb-0 w-full rounded bg-white py-4 text-sm font-bold text-grey-900 hover:bg-primary hover:text-white;
+      }
+    }
+  }
+}
+
+.swym-wishlist-notifications-container {
+  & * {
+    @apply !font-sans;
+  }
+
+  & .swym-notifications-container {
+    @apply !left-1/2 !top-auto !bottom-0 w-fit !-translate-x-1/2 !translate-y-full overflow-hidden rounded border border-solid border-primary;
+
+    &.swym-showing {
+      @apply !-translate-y-6 md:!-translate-y-10;
+    }
+
+    & .swym-product-tile {
+      @apply px-4 py-3;
+    }
+
+    & .swym-image {
+      @apply hidden;
+    }
+
+    & .swym-details-container {
+      & .swym-details {
+        @apply flex items-center justify-center p-0 text-sm !tracking-normal text-primary;
+
+        &:before {
+          @apply mr-2 block h-6 w-6 content-[''];
+
+          background: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%20%20%3Cpath%20stroke%3D%22%23333%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M16.125%209.75%2010.622%2015l-2.747-2.625%22%2F%3E%0A%20%20%3Cpath%20stroke%3D%22%23333%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M12%2021a9%209%200%201%200%200-18%209%209%200%200%200%200%2018Z%22%2F%3E%0A%3C%2Fsvg%3E')
+            no-repeat center;
+        }
+
+        & .swym-emphasis {
+          @apply mr-1;
+        }
+      }
+    }
+
+    & .swym-close-btn {
+      @apply hidden;
+    }
+  }
+}

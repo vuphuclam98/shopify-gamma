@@ -1,0 +1,35 @@
+{
+  "name": "Account",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Login \/ Register"
+    },
+    {
+      "type": "image_picker",
+      "id": "login_image",
+      "label": "Login Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "register_image",
+      "label": "Register Image"
+    },
+    {
+      "type": "text",
+      "id": "gender_options",
+      "label": "Options of gender",
+      "default": "Male|Female"
+    },
+    {
+      "type": "header",
+      "content": "Account address"
+    },
+    {
+      "type": "text",
+      "id": "address_note",
+      "label": "Address note",
+      "default": ""
+    }
+  ]
+}

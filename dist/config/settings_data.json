@@ -1,0 +1,274 @@
+{
+  "current": {
+    "login_image": "shopify:\/\/shop_images\/0a04c749d5df8fd48cf6797a5e1e179f.png",
+    "register_image": "shopify:\/\/shop_images\/8i.png",
+    "gender_options": "Male|Female|Other",
+    "storefront_access_token": "fb051048014145f140690f784704b2c4",
+    "bespoke_access_token": "74de1b0b39ad48e3c06c538ea9b9de599b360945",
+    "google_maps_key": "",
+    "cart_threhold_amount": "100",
+    "banner_checkout": "shopify:\/\/shop_images\/Banner_ae970d6f-01f5-4a72-980a-ee83a3e95437.png",
+    "text_footer": "Refund Policy",
+    "link_text_footer": "#",
+    "text_footer_2": "Privacy Policy",
+    "link_text_footer_2": "#",
+    "text_footer_3": "Terms of Service",
+    "link_text_footer_3": "#",
+    "apple_touch_icon": "shopify:\/\/shop_images\/3021289283_KKB_Favicon_Supermint_64x64px_V1_256x256_8ef08076-97c5-4a50-802e-0a112ff8a354.png",
+    "favicon_png_32": "shopify:\/\/shop_images\/3021289283_KKB_Favicon_Supermint_64x64px_V1_256x256_8ef08076-97c5-4a50-802e-0a112ff8a354.png",
+    "favicon_png_16": "shopify:\/\/shop_images\/3021289283_KKB_Favicon_Supermint_64x64px_V1_256x256_8ef08076-97c5-4a50-802e-0a112ff8a354.png",
+    "gtag_id": "AW-722605312",
+    "gtm_head_id": "GTM-T89QWP6",
+    "default_image": "shopify:\/\/shop_images\/Our_Products_-_Gift_Box.png",
+    "logo": "shopify:\/\/shop_images\/KKB_Logo_950fbddb-1041-407f-a679-b5913686e2ee.png",
+    "newsletter_background": "shopify:\/\/shop_images\/Footer_7151c30a-5fec-48de-b230-608c0ea31e00.png",
+    "newsletter_background_mobile": "shopify:\/\/shop_images\/Standard.png",
+    "text_form": "<p>By signing up, you agree to our <a href=\"#\">T&Cs<\/a> and <a href=\"#\">Privacy Policy<\/a>.<\/p>",
+    "social_instagram_link": "https:\/\/www.instagram.com\/",
+    "social_facebook_link": "https:\/\/www.facebook.com\/",
+    "social_pinterest_link": "https:\/\/www.pinterest.com.au\/convertdigital.com.au",
+    "share_twitter": false,
+    "sections": {
+      "topbar": {
+        "type": "topbar",
+        "blocks": {
+          "6ed41ccf-1a2c-4094-9cc2-ddc955c94dee": {
+            "type": "message",
+            "settings": {
+              "message": "refrigerated shipping",
+              "icon": "shopify:\/\/shop_images\/pngaaa.com-190856.png"
+            }
+          },
+          "10f470b0-05ae-499c-9ef2-6cc0775e9709": {
+            "type": "message",
+            "settings": {
+              "message": "Same-day & express delivery available",
+              "icon": "shopify:\/\/shop_images\/ClockClockwise.png"
+            }
+          },
+          "db1d901d-ec4a-492c-b1dd-468bd505147b": {
+            "type": "message",
+            "settings": {
+              "message": "Free Click & Collect available",
+              "icon": "shopify:\/\/shop_images\/HandPointing.png"
+            }
+          },
+          "9ca9e79b-fc96-4297-886e-c84ba819da8e": {
+            "type": "message",
+            "settings": {
+              "message": "Free Shipping on orders over $100",
+              "icon": "shopify:\/\/shop_images\/Truck.png"
+            }
+          }
+        },
+        "block_order": [
+          "6ed41ccf-1a2c-4094-9cc2-ddc955c94dee",
+          "10f470b0-05ae-499c-9ef2-6cc0775e9709",
+          "db1d901d-ec4a-492c-b1dd-468bd505147b",
+          "9ca9e79b-fc96-4297-886e-c84ba819da8e"
+        ],
+        "settings": {
+          "topbar_enable": true
+        }
+      },
+      "site-header": {
+        "type": "site-header",
+        "blocks": {
+          "c19440db-2ae7-478a-bbba-8f4cff23e7f6": {
+            "type": "mega_menu_item",
+            "settings": {
+              "simple_menu": false,
+              "title": "UAT Testing",
+              "featured_image": "shopify:\/\/shop_images\/3021289283_KKB_Favicon_Supermint_64x64px_V1_256x256_8ef08076-97c5-4a50-802e-0a112ff8a354.png",
+              "featured_navigation": ""
+            }
+          },
+          "b5eba02e-fb6e-4202-b83f-7315542dcc3d": {
+            "type": "mega_menu_item",
+            "settings": {
+              "simple_menu": false,
+              "title": "Shop",
+              "featured_image": "shopify:\/\/shop_images\/2656731651_Searchspring_HP_Tiles_250x250px_V3_21_Biscuits.png",
+              "featured_navigation": "menu-featured"
+            }
+          },
+          "8358f616-eefc-4b7e-8663-bc588f22b80f": {
+            "type": "mega_menu_item",
+            "settings": {
+              "simple_menu": false,
+              "title": "Gift Finder",
+              "featured_image": "shopify:\/\/shop_images\/image_12_6.png",
+              "featured_navigation": ""
+            }
+          },
+          "9dcd32e4-caf6-4423-a333-3b6d4fb520d5": {
+            "type": "mega_menu_item",
+            "settings": {
+              "simple_menu": false,
+              "title": "Corporate Gifting",
+              "featured_image": "shopify:\/\/shop_images\/2_d2d36392-2393-4f44-8c72-369fe7c3b4ac.png",
+              "featured_navigation": ""
+            }
+          },
+          "a657ebad-0856-4418-b102-017f864fb5d2": {
+            "type": "mega_menu_item",
+            "settings": {
+              "simple_menu": true,
+              "title": "About Convert Digital",
+              "featured_image": "shopify:\/\/shop_images\/2656731651_Searchspring_HP_Tiles_250x250px_V3_13_Vegan.png",
+              "featured_navigation": ""
+            }
+          },
+          "44996e63-9248-4852-9e10-d4124f5a7e24": {
+            "type": "mega_menu_item",
+            "settings": {
+              "simple_menu": true,
+              "title": "Recipes & News",
+              "featured_image": "shopify:\/\/shop_images\/2656731651_Searchspring_HP_Tiles_250x250px_V3_17_Shavings.png",
+              "featured_navigation": "blog-landing"
+            }
+          }
+        },
+        "block_order": [
+          "c19440db-2ae7-478a-bbba-8f4cff23e7f6",
+          "b5eba02e-fb6e-4202-b83f-7315542dcc3d",
+          "8358f616-eefc-4b7e-8663-bc588f22b80f",
+          "9dcd32e4-caf6-4423-a333-3b6d4fb520d5",
+          "a657ebad-0856-4418-b102-017f864fb5d2",
+          "44996e63-9248-4852-9e10-d4124f5a7e24"
+        ],
+        "settings": {
+          "menu": "main-menu",
+          "menu_second": "menu-second",
+          "location_url": "",
+          "banner_background": "#d9d7b2",
+          "banner_image": "shopify:\/\/shop_images\/image_4_1.png",
+          "banner_title": "Build your own praline box",
+          "banner_cta": "Get started",
+          "banner_url": "#",
+          "banner_text_color": "#050606",
+          "cta_image_1": "shopify:\/\/shop_images\/banner_1.png",
+          "cta_text_1": "Personalisation",
+          "cta_url_1": "shopify:\/\/collections\/personalisation",
+          "cta_image_2": "shopify:\/\/shop_images\/banner_2.png",
+          "cta_text_2": "Attica x Convert Digital",
+          "cta_url_2": "#"
+        }
+      },
+      "footer-main": {
+        "type": "footer-main",
+        "blocks": {
+          "67d58a0e-35cf-4053-a2ac-4007e4ff9d9c": {
+            "type": "menu",
+            "settings": {
+              "title": "Shop by",
+              "footer_menu": "footer-shop-by"
+            }
+          },
+          "8627cefd-ebd1-4d4c-9200-e25e11abcbae": {
+            "type": "menu",
+            "settings": {
+              "title": "Convert Digital",
+              "footer_menu": "footer-koko-black"
+            }
+          },
+          "52e90f15-85d2-4e7b-b4fd-f124cc88053d": {
+            "type": "menu",
+            "settings": {
+              "title": "Help & Support",
+              "footer_menu": "footer-help-support"
+            }
+          }
+        },
+        "block_order": [
+          "67d58a0e-35cf-4053-a2ac-4007e4ff9d9c",
+          "8627cefd-ebd1-4d4c-9200-e25e11abcbae",
+          "52e90f15-85d2-4e7b-b4fd-f124cc88053d"
+        ],
+        "settings": {
+          "social_media_title": "Follow us"
+        }
+      },
+      "footer-bottom": {
+        "type": "footer-bottom",
+        "blocks": {
+          "4a6ca296-c981-4214-8b84-db0da718e2f7": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Visa_84dc71b6-0f03-4a52-8b54-e60625011b31.png",
+              "icon_link": "#"
+            }
+          },
+          "5501f2a5-8f39-4abd-ab17-5b065adbd72c": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Mastercard_43a2791f-5adb-4b67-b386-ce5d6fecb828.png",
+              "icon_link": "#"
+            }
+          },
+          "4b12b6de-b97f-412a-b797-53396bcfea3a": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/PayPal_ce43e8c3-36bb-4546-b3b7-aa66e815554d.png",
+              "icon_link": "#"
+            }
+          },
+          "6c5e1854-565b-495f-96d5-d27336acad8b": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Zip_4b69a0bd-94bb-4f46-aceb-d6c1fb3a2feb.png",
+              "icon_link": "#"
+            }
+          },
+          "854497e6-5ff7-4cae-aa43-2ffc173be665": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Afterpay_134471ba-bba8-4303-a30e-60a598df0909.png",
+              "icon_link": "#"
+            }
+          }
+        },
+        "block_order": [
+          "4a6ca296-c981-4214-8b84-db0da718e2f7",
+          "5501f2a5-8f39-4abd-ab17-5b065adbd72c",
+          "4b12b6de-b97f-412a-b797-53396bcfea3a",
+          "6c5e1854-565b-495f-96d5-d27336acad8b",
+          "854497e6-5ff7-4cae-aa43-2ffc173be665"
+        ],
+        "settings": {
+          "copyright": "© Convert Digital  2023",
+          "text_link": "<p><a href=\"#\">Privacy Policy<\/a> <a href=\"#\">Terms & Conditions<\/a><\/p>"
+        }
+      },
+      "cart-slideout": {
+        "type": "cart-slideout",
+        "settings": {
+        }
+      },
+      "colour-swatch": {
+        "type": "colour-swatch",
+        "settings": {
+        }
+      },
+      "searchspring-snippet": {
+        "type": "searchspring-snippet",
+        "settings": {
+        }
+      }
+    },
+    "content_for_index": [
+
+    ],
+    "blocks": {
+      "8776485610325655785": {
+        "type": "shopify:\/\/apps\/hiko-social-login\/blocks\/hiko-auth\/3832d7e1-5bcd-4b72-91da-236b57feef8f",
+        "disabled": false,
+        "settings": {
+          "social_font": "enable"
+        }
+      }
+    }
+  },
+  "presets": {
+  }
+}

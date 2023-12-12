@@ -1,0 +1,81 @@
+@layer utilities {
+  .plp-card-mini-cart {
+    @apply grid h-[auto] w-[248px] grid-cols-[80px_1fr] grid-rows-1 items-start gap-x-4 !place-self-stretch self-start border-0 px-2 py-0;
+
+    & .plp-card-image {
+      @apply row-span-3 mb-0;
+    }
+
+    & .plp-card-title {
+      @apply col-start-2 mb-1 h-fit min-h-[72px] text-left md:px-0;
+    }
+
+    & .plp-card-title-link {
+      @apply md:text-sm;
+    }
+
+    & .plp-card-content {
+      @apply col-start-2 md:px-0;
+    }
+
+    & .plp-card-variant {
+      @apply text-left text-xs;
+    }
+
+    & .plp-card-badge,
+    & .plp-card-price {
+      @apply hidden;
+    }
+
+    & .plp-card-button {
+      @apply mt-1 font-normal md:text-sm md:tracking-normal lg:min-h-[40px] lg:p-1;
+    }
+  }
+}
+
+.plp-card {
+  @apply border-r;
+
+  &:nth-child(even) {
+    @apply border-r-0 sm:border-r;
+  }
+
+  &:nth-child(3n) {
+    @apply sm:border-r-0 xl:border-r;
+  }
+
+  &:nth-child(4n) {
+    @apply xl:border-r xl:border-r-0;
+  }
+}
+
+.plp-card-search {
+  & .plp-card-variant,
+  & .plp-card-title {
+    @apply text-left;
+  }
+
+  & .plp-card-title,
+  & .plp-card-content {
+    @apply p-0;
+  }
+
+  & .price {
+    @apply justify-end;
+  }
+}
+
+.plp-card-member-exclusive {
+  @apply bg-secondary bg-opacity-[4%];
+}
+
+.plp-card-banner {
+  & a {
+    @apply h-full w-full;
+  }
+
+  & img,
+  iframe {
+    @apply h-full w-full object-cover;
+  }
+}

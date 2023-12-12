@@ -1,0 +1,81 @@
+<div class="account-orders {% if customer.orders.size > 0 %}orders-have-items{% endif %}">
+  {%- if customer.orders.size > 0 -%}
+    <div class="header relative flex items-center justify-between pb-4 before:absolute before:bottom-0 before:-left-4 before:w-[calc(100%+32px)] before:border-b before:content-[''] lg:mb-4 lg:pb-0 lg:before:hidden">
+      <h2 class="h5 lg:h4">{{- title -}}</h2>
+      {%- if show_view_orders -%}
+        <a class="link mt-2 normal-case" href="/account?view=orders">{{- 'customer.account.view_orders' | t -}}</a>
+      {%- endif -%}
+    </div>
+    {%- if limit -%}
+      {%- assign orders_per_page = 9999999 -%}
+    {%- else -%}
+      {%- assign orders_per_page = orders_per_page | default: 10 -%}
+    {%- endif -%}
+    {%- paginate customer.orders by orders_per_page -%}
+      <div>
+        <div class="rounded lg:border lg:border-default">
+          <table class="w-full">
+            {%- for order in customer.orders limit: limit -%}
+              {%- liquid
+                assign order_item_first = order.line_items | first
+                assign order_item_image = order_item_first.product.featured_image
+              -%}
+              <tbody class="account-order-details-inner border-b border-default last:border-transparent">
+                <tr>
+                  {%- assign item_class = 'hidden pt-6 text-left lg:table-cell text-text-xs uppercase text-grey-500' -%}
+                  <td rowspan="2" class="w-[88px] pt-4 align-top lg:table-cell lg:w-[104px] lg:pl-4 lg:pt-0 lg:align-middle">
+                    {%- render 'image', image: order_item_image, class: 'relative w-16 aspect-1' -%}
+                  </td>
+                  <th class="{{ item_class }} w-[calc(156/988*100%)]">{{- 'customer.orders.order_number' | t -}}</th>
+                  <th class="{{ item_class }} w-[calc(156/988*100%)]">{{- 'customer.orders.date' | t -}}</th>
+                  <th class="{{ item_class }} w-[calc(156/988*100%)]">{{- 'customer.orders.fulfillment_status' | t -}}</th>
+                  <th class="{{ item_class }} w-[calc(156/988*100%)]">{{- 'customer.orders.total' | t -}}</th>
+                  <th rowspan="2" class="hidden pr-6 text-right lg:table-cell">
+                    <a href="{{ order.customer_url }}" class="button-outlined whitespace-nowrap text-sm normal-case">
+                      {{- 'customer.orders.view_order' | t -}}
+                    </a>
+                  </th>
+                </tr>
+                <tr>
+                  {%- assign item_order_value_class = 'pb-2 lg:pb-6 flex lg:table-cell text-sm text-grey-700 before:content-[attr(data-label)] before:block before:w-[100px] before:mr-6 before:text-grey-900 before:text-sm lg:before:hidden' -%}
+                  <td class="{{ item_order_value_class }} pt-4 lg:pt-0" data-label="{{ 'customer.orders.order_number' | t }}">
+                    <a href="{{- order.customer_url -}}" class="link-gray"
+                      >#
+                      {{- order.order_number -}}
+                    </a>
+                  </td>
+                  <td class="{{ item_order_value_class }}" data-label="{{- 'customer.orders.date' | t -}}">{{- order.created_at | date: '%b %d, %Y' -}}</td>
+                  <td class="{{ item_order_value_class }}" data-label="{{- 'customer.orders.fulfillment_status' | t -}}">
+                    {{- order.fulfillment_status_label -}}
+                  </td>
+                  <td class="{{ item_order_value_class }}" data-label="{{- 'customer.orders.total' | t -}}">{{- order.total_price | money -}}</td>
+                </tr>
+                <tr class="lg:hidden">
+                  <td colspan="6" class="pb-4 pt-2 text-right">
+                    <a href="{{- order.customer_url -}}" class="button-outlined block w-full whitespace-nowrap text-sm normal-case">
+                      {{- 'customer.orders.view_order' | t -}}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            {%- endfor -%}
+          </table>
+        </div>
+        <div data-pagination class="empty:hidden">
+          {%- render 'pagination', pagination: paginate, class: 'pt-4 lg:pt-6 border-t lg:border-t-transparent mt-4' -%}
+        </div>
+      </div>
+    {%- endpaginate -%}
+  {%- else -%}
+    {%- if empty_order != blank -%}
+      <div class="flex min-h-[220px] items-center justify-center rounded border border-default md:min-h-[236px]">
+        <div class="text-center">
+          <span>
+            {%- render 'icon' with 'icon-shopping-bag-2', class: 'w-8 h-8 mx-auto text-secondary mb-2' -%}
+          </span>
+          <span class="text-sm">{{- empty_order -}}</span>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>

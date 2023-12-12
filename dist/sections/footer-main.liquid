@@ -1,0 +1,56 @@
+{% liquid
+  assign blocks = section.blocks
+  assign social_media_title = section.settings.social_media_title
+%}
+
+<footer class="footer md:py-12">
+  <div class="container md-max:px-0">
+    <div class="flex flex-col md:flex-row md:justify-between">
+      <div class="flex flex-col md:flex-row">
+        {%- if blocks.size > 0 -%}
+          {%- render 'footer-blocks', blocks: blocks %}
+        {%- endif -%}
+        {%- render 'footer-blocks-desktop', blocks: blocks -%}
+      </div>
+      <div class="flex flex-col pb-6 md:w-[160px] lg:w-[230px] lg:pb-4">
+        <h3 class="hidden text-sm font-bold uppercase text-grey-900 md:block ">
+          {{- social_media_title -}}
+        </h3>
+        {%- render 'social-media', class: 'justify-center mt-6 md:justify-start md:mt-[14px]' -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer Main",
+  "settings": [
+    {
+      "type": "text",
+      "id": "social_media_title",
+      "label": "Social Media Title",
+      "default": "Follow us"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "link_list",
+          "id": "footer_menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

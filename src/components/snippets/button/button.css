@@ -1,0 +1,57 @@
+@layer components {
+  .button {
+    @apply label relative inline-block min-h-[48px] overflow-hidden rounded
+    border border-solid px-6 pt-[13px] pb-[11px] text-center font-bold uppercase text-white transition-colors duration-300 ease-in-out
+    disabled:pointer-events-none disabled:border-grey-100 disabled:bg-grey-100 disabled:text-grey-500;
+  }
+
+  .button-primary {
+    @apply button border-primary bg-primary
+    hover:border-primary-hover  hover:bg-primary-hover;
+  }
+
+  .button-secondary {
+    @apply button border-secondary bg-secondary
+      hover:border-secondary-hover   hover:bg-secondary-hover;
+  }
+
+  .button-outlined-hero {
+    @apply button border-white bg-white text-grey-900
+      hover:border-success-content hover:bg-success-bg hover:text-white
+      disabled:border-default disabled:bg-transparent disabled:text-grey-500;
+  }
+
+  .button-outlined {
+    @apply button border-default bg-transparent text-grey-900
+      hover:border-default hover:bg-grey-100 hover:text-grey-900
+      disabled:border-default disabled:bg-transparent disabled:text-grey-500;
+  }
+
+  .button-outlined-white {
+    @apply button-outlined border-white text-white hover:border-white hover:bg-white hover:text-grey-900;
+  }
+
+  .button-small {
+    @apply min-h-[38px] py-1 px-3.5;
+  }
+
+  .button-large {
+    @apply min-h-[54px] pt-4 pb-3.5;
+  }
+
+  .button-large-2 {
+    @apply min-h-[72px] pt-4 pb-3.5;
+  }
+
+  .button-white {
+    @apply button button-outlined border-white bg-white;
+  }
+
+  .button-icon {
+    @apply max-h-[48px];
+  }
+
+  .button-disabled {
+    @apply pointer-events-none border-grey-100 bg-grey-100 text-grey-500;
+  }
+}

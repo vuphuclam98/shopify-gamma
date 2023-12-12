@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumbs",
+      "settings": {}
+    },
+    "banner": {
+      "type": "collection-banner",
+      "settings": {}
+    },
+    "main": {
+      "type": "plp",
+      "settings": {}
+    },
+    "recently": {
+      "type": "product-recently",
+      "settings": {}
+    },
+    "seo": {
+      "type": "seo-text",
+      "settings": {}
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "banner",
+    "main",
+    "recently",
+    "seo"
+  ]
+}

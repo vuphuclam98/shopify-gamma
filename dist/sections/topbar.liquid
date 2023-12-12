@@ -1,0 +1,36 @@
+<div class="topbar js-sticky-topbar">
+  {%- render 'topbar-marquee', message_class: 'mx-4', class_background: 'bg-black' -%}
+</div>
+
+{% schema %}
+{
+  "name": "Topbar",
+  "class": "shopify-section--topbar z-40 relative",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "topbar_enable",
+      "label": "Enable Topbar",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "message",
+          "label": "Message"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

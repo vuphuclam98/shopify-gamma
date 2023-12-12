@@ -1,0 +1,55 @@
+{% liquid
+  assign card_class = 'flex flex-col w-1/2 lg:w-1/4 p-4 lg:p-8 border-default border-r border-b [&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0'
+  assign image_wrapper_class = 'relative aspect-1 w-full overflow-hidden rounded-2xl mb-4 lg:mb-8'
+  assign card_wrapper_class = 'flex justify-start flex-row flex-wrap'
+%}
+{%- if heading != blank or subheading != blank or blocks.size > 0 -%}
+  <div class="bg-grey-100">
+    {%- if heading != blank or subheading != blank -%}
+      <div class="container py-8 text-center border-t border-b lg:py-12 border-default">
+        {%- if heading != blank -%}
+          <h2 class="text-2xl font-bold text-grey-900 lg:text-4xl lg:leading-[44px] mb-1.5">{{- heading -}}</h2>
+        {%- endif -%}
+        {%- if subheading != blank -%}
+          <p class="text-base leading-[26px] lg:text-lg lg:leading-[30px]">{{- subheading -}}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if blocks.size > 0 -%}
+      <div class="{{ card_wrapper_class }}">
+        {%- for block in blocks -%}
+          <div class="{{ card_class }}">
+            <div class= "{{ image_wrapper_class }}"">
+              {%- if block.settings.cta_url != blank -%}
+                <a class="block w-full h-full" href="{{- block.settings.cta_url -}}">
+              {%- endif -%}
+                {% render 'image',
+                  image: block.settings.image,
+                  class: 'hover:zoom duration-300 fit'
+                %}
+              {%- if block.settings.cta_url != blank -%}
+                </a>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.title != blank -%}
+              <h3 class="mb-4 text-center h5 lg:h4">
+                {%- if block.settings.cta_url != blank -%}
+                  <a class="hover:underline" href="{{- block.settings.cta_url -}}">{{- block.settings.title -}}</a>
+                {%- else -%}
+                  {{- block.settings.title -}}
+                {%- endif -%}
+              </h3>
+            {%- endif -%}
+            {%- if block.settings.cta_url != blank and block.settings.cta_text != blank -%}
+              {%- render 'button',
+                link_url: block.settings.cta_url,
+                class: 'button-outlined mt-auto whitespace-nowrap px-3',
+                link_text: block.settings.cta_text
+              -%}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

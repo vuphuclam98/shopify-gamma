@@ -1,0 +1,55 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% liquid
+      render 'gtm-head'
+      render 'preconnect-required-origins'
+      render 'favicon'
+      render 'seo-title'
+      render 'social-meta'
+      render 'structured-data'
+      render 'font-faces'
+      render 'gm-state'
+      render 'theme-styles'
+      render 'delayed-scripts'
+
+      if settings.searchspring_enable and settings.searchspring_site_id != blank
+        render 'searchspring-snippet'
+      endif
+    %}
+    {{ content_for_header }}
+  </head>
+
+  <body id="{{ page_title | handle }}" class="no-touch template template-{{ template.name | handle }}">
+    <a class="skip_link hidden" id="skip_to_content" href="#main">Skip to Main Content</a>
+    <div id="page">
+      {%- section 'site-header' -%}
+      <main id="MainContent" role="main" tabindex="-1" class="outline-none">
+        {{ content_for_layout }}
+      </main>
+      {%- render 'site-footer' -%}
+    </div>
+    {% liquid
+      if settings.enable_mini_cart
+        unless template.name == 'cart'
+          section 'cart-slideout'
+        endunless
+      endif
+
+      section 'colour-swatch'
+      render 'notice-global'
+      render 'icon-global'
+      render 'theme-scripts'
+      render 'gtm-body'
+
+      if settings.enable_wishlist
+        render 'swymSnippet'
+      endif
+    %}
+  </body>
+</html>

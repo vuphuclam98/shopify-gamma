@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "template": {
+      "type": "template-search",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "template"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-page",
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "description": ""
+      }
+    }
+  },
+  "order": [
+    "template"
+  ]
+}

@@ -1,0 +1,51 @@
+{%- if settings.social_enable -%}
+  <div class="flex gap-x-6 {{ class }}">
+    {%- if settings.social_facebook_link != blank -%}
+      <a
+        href="{{- settings.social_facebook_link -}}"
+        class="text-primary"
+        target="_blank"
+        title="{{- 'general.social.links.facebook' | t -}}"
+      >
+        {%- render 'icon' with 'icon-facebook', class: 'w-6 h-6' -%}
+        <span class="sr-only">{{- 'general.social.links.facebook' | t -}}</span>
+      </a>
+    {%- endif -%}
+
+    {%- if settings.social_instagram_link != blank -%}
+      <a
+        href="{{ settings.social_instagram_link }}"
+        class="text-primary"
+        target="_blank"
+        title="{{- 'general.social.links.instagram' | t -}}"
+      >
+        {%- render 'icon' with 'icon-instagram', class: 'w-6 h-6' -%}
+        <span class="sr-only">{{- 'general.social.links.instagram' | t -}}</span>
+      </a>
+    {%- endif -%}
+
+    {%- if settings.social_pinterest_link != blank -%}
+      <a
+        href="{{ settings.social_pinterest_link }}"
+        class="text-primary"
+        target="_blank"
+        title="{{- 'general.social.links.pinterest' | t -}}"
+      >
+        {%- render 'icon' with 'pinterest', class: 'w-6 h-6' -%}
+        <span class="sr-only">{{- 'general.social.links.pinterest' | t -}}</span>
+      </a>
+    {%- endif -%}
+
+    {%- if settings.social_tiktok_link != blank -%}
+      <a
+        href="{{ settings.social_tiktok_link }}"
+        class="text-primary"
+        target="_blank"
+        title="{{- 'general.social.links.tiktok' | t -}}"
+      >
+        {%- render 'icon' with 'tiktok', class: 'w-6 h-6' -%}
+        <span class="sr-only">{{- 'general.social.links.tiktok' | t -}}</span>
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

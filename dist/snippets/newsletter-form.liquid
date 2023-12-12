@@ -1,0 +1,143 @@
+{% liquid
+  assign cta_text = settings.newsletter_popup_button_text
+  assign title = settings.newsletter_popup_title
+  assign description = settings.newsletter_popup_description
+  assign text_form = settings.text_form
+  assign newsletter_email_placeholder = 'newsletter-form-footer.email' | t
+  assign newsletter_background = settings.newsletter_background
+  assign newsletter_background_mobile = settings.newsletter_background_mobile
+  assign list_id = settings.klaviyo_list_id
+  assign title = title | default: ''
+  assign message_duplicate = settings.klaviyo_message_duplicate
+  assign message_success = settings.klaviyo_message_success
+  assign notice_global = notice_global | default: false
+  assign notice_custom = notice_custom | default: false
+  assign newsletter_form_cancel_class = newsletter_form_cancel_class | default: ''
+  assign newsletter_form_class = newsletter_form_class | default: ''
+  assign wrapper_class = wrapper_class | default: ''
+  assign first_name = 'newsletter-form-footer.first_name' | t
+  assign class_padding = 'py-8'
+  if newsletter_background != blank and newsletter_background_mobile == blank
+    assign newsletter_background_mobile = newsletter_background
+  elsif newsletter_background_mobile != blank and newsletter_background == blank
+    assign newsletter_background = newsletter_background_mobile
+  endif
+%}
+
+<style>
+  .newsletter__background {
+    background-image: url({{ newsletter_background | image_url: 'master' }});
+    background-size: cover;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .newsletter__background {
+      background-image: url({{ newsletter_background_mobile | image_url: 'master' }});
+      background-size: contain;
+    }
+  }
+
+  @media screen and (min-width: 1441px) {
+    .newsletter__background {
+      background-size: contain;
+    }
+  }
+</style>
+
+<newsletter-form>
+  <div class="{% if newsletter_background != blank %} py-8{% endif %} js-newsletter-form {{ newsletter_form_class }}{% if newsletter_background != blank or newsletter_background_mobile != blank %} newsletter__background{% endif %}">
+    <div class="bg-black">
+      <div class="container md:px-11">
+        <div class="py-8 lg:flex lg:flex-row lg:justify-between lg:px-0 lg:py-12">
+          <div class="text-center lg:w-[343px] lg:text-left xl:w-[526px]">
+            {%- if title != blank -%}
+              <h3 class="text-3xl font-bold text-white lg:text-4xl">{{- title -}}</h3>
+            {%- endif -%}
+            {%- if description != blank -%}
+              <p class="mt-2 text-base text-white">{{ description }}</p>
+            {%- endif -%}
+          </div>
+          <form id="NewsllterForm-Footer">
+            <div class="newsletter-form__wrapper {{ wrapper_class }}">
+              <input type="hidden" name="g" value="{{ list_id }}">
+              <input type="hidden" name="$field" value="$email">
+              {%- assign class_wrap = 'xl:flex-nowrap' -%}
+              {%- if text_form != blank -%}
+                {%- assign class_wrap = class_wrap | replace: 'xl:flex-nowrap', 'xl:flex-wrap' -%}
+              {%- endif -%}
+              <div class="md:mx-auto md:flex md:max-w-[680px] md:flex-wrap md:items-center lg:w-[536px] lg:max-w-none xl:w-[692px] {{ class_wrap }}">
+                {%- render 'text-input',
+                  id: 'NewsllterForm-Footer_first_name',
+                  name: '$first_name',
+                  type: 'text',
+                  class: 'mt-4 lg:mt-0 md:w-[260px] md:mr-4',
+                  class_input: 'input-footer',
+                  label: first_name,
+                  placeholder: first_name,
+                  show_label: true,
+                  required: true
+                %}
+                {%- render 'text-input',
+                  id: 'NewsllterForm_Footer_email',
+                  name: '$email',
+                  type: 'email',
+                  class: 'mt-4 md:w-[260px] md:mr-4 lg:mr-0 lg:mt-0 xl:mr-4',
+                  class_input: 'input-footer',
+                  label: newsletter_email_placeholder,
+                  placeholder: newsletter_email_placeholder,
+                  show_label: true,
+                  required: true
+                %}
+                <button
+                  type="submit"
+                  class="button button-secondary mt-4 hidden w-full whitespace-nowrap md:block md:max-w-[128px] lg:mt-4 lg:hidden lg:max-w-[140px] xl:mt-0 xl:block"
+                  name="commit"
+                  id="SubscribeDesktop"
+                >
+                  {{- cta_text -}}
+                </button>
+                {%- if text_form != blank -%}
+                  <div class="mt-2.5 hidden text-xs text-white md:block lg:hidden xl:block [&>p>a]:underline">{{ text_form }}</div>
+                {%- endif -%}
+                <div class="mt-4 flex w-full flex-col-reverse md:hidden lg:flex lg:flex-row-reverse lg:items-start lg:justify-between xl:hidden">
+                  <button type="submit" class="button button-secondary mt-4 w-full lg:mt-0 lg:max-w-[260px]" name="commit" id="SubscribeMobile">
+                    {{- cta_text -}}
+                  </button>
+                  {%- if text_form != blank -%}
+                    <div class="text-xs text-white lg:mt-0 lg:max-w-[208px] [&>p>a]:underline">{{ text_form }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+              <span class="text-red js-newsletter-form-duplicate mt-4 hidden text-base">{{- message_duplicate -}}</span>
+              <span class="text-red js-newsletter-form-failed mt-4 hidden text-base"></span>
+              <button
+                type="button"
+                class="hover:text-smi newsletter-form__cancel js-close-modal mt-4 block text-center text-base text-grey-500 underline {{ newsletter_form_cancel_class }}"
+              >
+                {{- 'general.newsletter.no_thank_you' | t -}}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="submit-success js-newsletter-form-success mx-auto hidden text-center lg:max-w-[354px]">
+          {%- if notice_custom -%}
+            {%- if message_success != blank -%}
+              <h3 class="mb-4 text-xl font-semibold lg:text-2xl">{{- message_success -}}</h3>
+            {%- endif -%}
+            <a href="/" class="hover:text-smi mt-4 text-center text-base text-grey-500 underline">{{- 'general.newsletter.continue_shopping' | t -}}</a>
+          {%- endif -%}
+          {%- if notice_global -%}
+            <p class="text-left text-base font-medium text-grey-700">{{- 'general.newsletter.thank_you_signing_up' | t -}}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</newsletter-form>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-newsletter-form.js' | asset_url -}}
+  {%- endcapture -%}
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

@@ -1,0 +1,22 @@
+{{- 'module-wishlist-page.css' | asset_url | stylesheet_tag -}}
+
+<div>
+  <div id="swym-wishlist-render-container" class="wishlist"></div>
+  <div id="wishlist-items-container"></div>
+  <script type="text/javascript">
+    window.SwymCallbacks = window.SwymCallbacks || []
+    window.SwymCallbacks.push(function (swat) {
+      var wishlistContainerElement = document.querySelector('#swym-wishlist-render-container')
+      var queryParams = swat.utils.getEncodedAsObject(window.location.search)
+      swat.ui.renderWishlistInContainer(wishlistContainerElement, queryParams)
+    })
+  </script>
+</div>
+
+{%- unless ignore_script == true -%}
+  {%- capture src_url -%}
+    {{- 'module-wishlist-page.js' | asset_url -}}
+  {%- endcapture -%}
+
+  {%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+{%- endunless -%}

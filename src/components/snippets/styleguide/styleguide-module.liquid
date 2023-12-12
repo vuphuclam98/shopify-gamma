@@ -1,0 +1,38 @@
+<div class="py-2">
+  <div class="container">
+    <div class="grid gap-6 md:grid-cols-3">
+      <div class="flex flex-col items-start">
+        <h4 class="h5 mb-2">Notifications</h4>
+        {%- render 'notice-main', class: 'mb-3', icon: 'icon-faild', content: 'Standard notification' -%}
+        {%- render 'notice-main', class: 'mb-3 notice-main-error', icon: 'icon-faild', content: 'Error notification' -%}
+        {%- render 'notice-main', class: 'mb-3 notice-main-success', icon: 'icon-faild', content: 'Success notification' -%}
+        {%- render 'notice-main', class: 'mb-3 notice-main-warning', icon: 'icon-faild', content: 'Warning notification' -%}
+        {%- render 'notice-main', class: 'mb-3 notice-main-outline', icon: 'icon-faild', content: 'Toaster notification' -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Slideout</h4>
+        <div>
+          <button id="styleguide-slideout" class="button-primary js-modal-dialog-trigger">Slideout 1</button>
+        </div>
+        {%- render 'slideout',
+          id: 'styleguide-slideout',
+          title: 'Heading 1',
+          trigger_button: 'Open a slideout 1',
+          close_button: 'Close',
+          content: 'Content slideout 1'
+        -%}
+        <div>
+          <button id="styleguide-slideout-2" class="button-secondary js-modal-dialog-trigger mt-2">Slideout 2</button>
+        </div>
+        {%- render 'slideout', id: 'styleguide-slideout-2', title: 'Heading 2', trigger_button: 'Open a slideout 2', content: 'Content slideout 2' -%}
+      </div>
+      <div class="flex flex-col">
+        <h4 class="h5 mb-2">Modal dialog</h4>
+        <div>
+          <button id="styleguide-modal-dialog" class="button-primary js-modal-dialog-trigger">Modal dialog</button>
+        </div>
+        {%- render 'modal-dialog', id: 'styleguide-modal-dialog', content: 'Content modal' -%}
+      </div>
+    </div>
+  </div>
+</div>

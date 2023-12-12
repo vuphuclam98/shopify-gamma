@@ -1,0 +1,21 @@
+@layer components {
+  .radio-input__input {
+    @apply h-5 w-5 border-default text-secondary focus:shadow-0 disabled:bg-grey-100 disabled:checked:border-grey-100 disabled:checked:hover:bg-grey-100;
+
+    &:disabled:checked {
+      @apply border-default;
+
+      background-image: url('data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27%23D4D4D4%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%273%27/%3e%3c/svg%3e');
+    }
+
+    &:disabled {
+      & + .radio-input__label {
+        @apply text-grey-500;
+      }
+    }
+  }
+
+  .radio-input__label {
+    @apply ml-3 block text-base text-grey-700;
+  }
+}

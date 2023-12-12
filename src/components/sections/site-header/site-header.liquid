@@ -1,0 +1,205 @@
+{%- if section.settings.menu.links == blank -%}
+  {%- assign main_menu_linklist = 'main-menu' -%}
+{%- else -%}
+  {%- assign main_menu_linklist = section.settings.menu.links -%}
+{%- endif -%}
+
+<site-header id="site-header" class="relative z-30">
+  <div class="relative z-30 border-b border-default bg-white text-grey-900">
+    <div class="container">
+      <div class="flex items-center justify-between py-4">
+        <div class="text-left md:w-[248px]">
+          <div class="site-header-left-mobile flex-justify-center flex items-center gap-3 md:hidden md:gap-6">
+            <button
+              class="js-menu-trigger flex h-6 w-6 flex-col justify-between px-1 py-1 focus:outline-none"
+              type="button"
+              aria-label="open menu"
+            >
+              {%- assign generic_hamburger_line = 'relative inline-block h-0.5 w-full bg-primary transition rounded-[1px]' -%}
+              <span
+                class="{{ generic_hamburger_line }} [.is-active>&]:-top-[1px] [.is-active>&]:-left-[3px] [.is-active>&]:w-[22px] [.is-active>&]:translate-y-2 [.is-active>&]:rotate-45"
+              ></span>
+              <span class="{{ generic_hamburger_line }} [.is-active>&]:opacity-0"></span>
+              <span
+                class="{{ generic_hamburger_line }} [.is-active>&]:-top-[3px] [.is-active>&]:right-[3px] [.is-active>&]:w-[22px] [.is-active>&]:-translate-y-1 [.is-active>&]:-rotate-45"
+              ></span>
+            </button>
+            <div class="js-search-bar relative h-6 overflow-hidden">
+              {%- render 'search-bar' -%}
+            </div>
+          </div>
+          <div class="js-search-bar hidden md:block [.is-sticky_&]:xl:!hidden">
+            {%- render 'search-bar' -%}
+          </div>
+        </div>
+        <div class="text-center">
+          {%- render 'logo', class: 'w-[180px] md:w-[242px] lg:w-[290px]' -%}
+        </div>
+        <div class="text-right md:w-[168px] lg:w-[248px]">
+          <div class="flex items-start justify-end gap-3 md:gap-6">
+            {%- if section.settings.location_url -%}
+              <a href="{{- section.settings.location_url -}}" title="Location">
+                {%- render 'icon' with 'icon-location' -%}
+              </a>
+            {%- endif -%}
+            {%- if shop.customer_accounts_enabled -%}
+              <a href="{{- routes.account_url -}}" title="{{- 'customer.account.title' | t -}}" class="relative hidden md:block">
+                {%- render 'icon' with 'icon-person' -%}
+                {%- if customer -%}
+                  <span class="absolute top-1 -right-1 text-info-content md:top-3">
+                    {%- render 'icon' with 'icon-success', class: 'w-[18px] h-[18px]' -%}
+                  </span>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+            {%- if settings.enable_wishlist -%}
+              {%- render 'wishlist-count', class: 'hidden md:block' -%}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- render 'menu-navigation', settings: section.settings, main_menu_linklist: main_menu_linklist, blocks: section.blocks -%}
+</site-header>
+
+{%- render 'menu-slideout',
+  settings: section.settings,
+  blocks: section.blocks,
+  menu_handle: section.settings.menu,
+  menu_second_handle: section.settings.menu_second
+-%}
+
+{%- capture src_url -%}
+  {{- 'section-site-header.js' | asset_url -}}
+{%- endcapture -%}
+
+{%- render 'atom_script', src: src_url, priority: 'normal', type: 'defer' -%}
+
+{% schema %}
+{
+  "name": "Site Header",
+  "class": "shopify-section-site-header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Header Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_second",
+      "label": "Header Navigation Menu Second"
+    },
+    {
+      "type": "url",
+      "id": "location_url",
+      "label": "URL of location"
+    },
+    {
+      "type": "header",
+      "content": "Banner (Mobile Only)"
+    },
+    {
+      "type": "color",
+      "id": "banner_background",
+      "label": "Background Colour",
+      "default": "#D9D7B2"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "banner_cta",
+      "label": "CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "banner_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "color",
+      "id": "banner_text_color",
+      "label": "Text Colour",
+      "default": "#050606"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_image_1",
+      "label": "CTA Image 1"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_1",
+      "label": "CTA Text 1"
+    },
+    {
+      "type": "url",
+      "id": "cta_url_1",
+      "label": "CTA URL 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_image_2",
+      "label": "CTA Image 2"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_2",
+      "label": "CTA Text 2"
+    },
+    {
+      "type": "url",
+      "id": "cta_url_2",
+      "label": "CTA URL 2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu_item",
+      "name": "Mega menu item",
+      "settings": [
+        {
+          "type": "checkbox",
+          "label": "Simple Menu",
+          "id": "simple_menu"
+        },
+        {
+          "type": "text",
+          "label": "Menu Title",
+          "id": "title"
+        },
+        {
+          "type": "image_picker",
+          "label": "Featured Image",
+          "id": "featured_image"
+        },
+        {
+          "type": "link_list",
+          "id": "featured_navigation",
+          "label": "Featured Navigation"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_navigation_image",
+          "label": "Featured Navigation Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

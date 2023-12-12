@@ -1,0 +1,13 @@
+<script>
+  var collectionConfig = {
+    "title": {{ collection.title | json }},
+    "categories": [
+      {{ categories | remove_first: ',' }}
+    ],
+    "perPage": {{ section_settings.per_page | json }},
+    "hideSort": {{ section_settings.hide_sort | json }},
+    "hideTotalItems": {{ section_settings.hide_total_items | json }}
+  }
+</script>
+
+<plp-native class="js-plp-native" handle="{{ collection.handle }}"></plp-native>

@@ -1,0 +1,94 @@
+{% liquid
+  assign blocks = section.blocks
+  case blocks.size
+    when 2
+      assign class = 'md:grid-cols-2'
+      assign image_wrapper_class = 'rounded-2xl aspect-[344/276] md:aspect-[656/496]'
+    when 3
+      assign class = 'md:grid-cols-2 lg:grid-cols-3'
+      assign image_wrapper_class = 'rounded-2xl aspect-[344/276] md:aspect-[416/440]'
+    when 4
+      assign class = 'md:grid-cols-2 lg:grid-cols-4'
+      assign image_wrapper_class = 'rounded-2xl aspect-[344/276] md:aspect-[297/240]'
+  endcase
+%}
+
+<div class="relative grid grid-cols-1 after:absolute after:top-[-1px] after:h-[1px] after:w-full after:bg-default {{ class }}">
+  {% for block in blocks %}
+    {%- render 'card',
+      url: block.settings.cta_url,
+      class: 'w-full px-4 py-6 md:p-8 border-b border-default md:odd:border-r lg:border-r lg:last:border-r-0',
+      content_class: 'flex flex-col grow',
+      image_wrapper_class: image_wrapper_class,
+      image: block.settings.image,
+      mobile_width: 440,
+      title: block.settings.title,
+      title_class: 'text-2xl md:text-3xl pt-6 md:pt-6 font-bold',
+      description: block.settings.description,
+      description_class: 'pt-1 md:pt-2 text-base font-normal',
+      cta_text: block.settings.cta_text,
+      cta_class: 'button-outlined uppercase w-fit mt-4 md:mt-6'
+    -%}
+  {% endfor %}
+</div>
+{% schema %}
+{
+  "name": "Multi Columns",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Cta text"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "Cta url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi Columns",
+      "category": "Card Grid",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
