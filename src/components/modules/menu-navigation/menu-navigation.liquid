@@ -62,7 +62,7 @@
         <div class="text-right [.is-sticky_&]:xl:block">
           <div class="flex items-center justify-end gap-3 lg:gap-4 xl:ml-2.5 2xl:gap-6">
             <div class="js-search-bar relative overflow-hidden">
-              {%- render 'search-bar-custom' -%}
+              {%- render 'icon' with 'icon-search', class: 'w-6 h-6 text-primary' -%}
             </div>
             {%- if settings.location_url -%}
               <a href="{{- settings.location_url -}}" title="Location">
@@ -84,6 +84,9 @@
             {%- endif -%}
             {%- render 'cart-count', id_button: 'MiniCart' -%}
           </div>
+        </div>
+        <div class="absolute top-1/2 left-1/2 w-4/5 -translate-y-1/2 -translate-x-1/2">
+          {%- render 'search-bar-custom' -%}
         </div>
       </div>
     </div>

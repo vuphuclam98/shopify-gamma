@@ -1,18 +1,6 @@
-<div class="search-bar-native-custom">
-    <div id="btn-search" class="relative btn-search">
-      <input
-        type="text"
-        class="input w-full py-2.5 h-12 pl-3.5 pr-14 rounded"
-        placeholder="What are you looking for?"
-        >
-      <div class="search-icon-as-placeholder absolute top-1/2 -translate-y-1/2 right-4 cursor-pointer center-item-vertically">
-        {%- render 'icon' with 'icon-search', class: 'w-6 h-6 text-primary' -%}
-      </div>
-      <div class="close-icon hidden absolute top-1/2 -translate-y-1/2 right-4">
-        {%- render 'icon' with 'icon-close-search', class: 'w-6 h-6 text-primary' -%}
-      </div>
-    </div>
-</div>
+<search-bar-native-custom>
+</search-bar-native-custom>
+
 {%- capture src_url -%}
     {{- 'module-search-bar-custom.js' | asset_url -}}
 {%- endcapture -%}
