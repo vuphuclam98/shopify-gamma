@@ -394,7 +394,8 @@
     "pages": "Pages",
     "all_results": "See all results",
     "no_result": "No products found",
-    "did_you_mean": "Did you mean"
+    "did_you_mean": "Did you mean",
+    "view_all_count": "View all {{ count }} products"
   },
   "localization": {
     "country_label": "Country"
