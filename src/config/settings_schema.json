@@ -602,5 +602,24 @@
         "default": "BrownStd"
       }
     ]
+  },
+  {
+    "name": "Trending Products",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Trending Products Search"
+      },
+      {
+        "type": "collection",
+        "id": "product_recommendations",
+        "label": "Trending Products list"
+      },
+      {
+        "type": "link_list",
+        "id": "popular_searches",
+        "label": "Popular Search"
+      }
+    ]
   }
 ]

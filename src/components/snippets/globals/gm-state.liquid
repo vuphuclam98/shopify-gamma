@@ -44,6 +44,10 @@
     },
     customs: {
       badge: {% render 'get-custom-badge' %}
+    },
+    trending_product_search: {
+      products: {{- settings.product_recommendations.products | json -}},
+      popular_searches: {{- linklists[settings.popular_searches].links | json -}}
     }
   };
 </script>

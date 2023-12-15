@@ -8,7 +8,10 @@ import LoaderSpin from 'snippets/loader-spin/loader-spin'
 import debounce from 'lodash.debounce'
 
 const initialState = 0
-const reducer = (state, action) => {
+const trendingProducts = window.GM_STATE.trending_product_search.products
+const popularSearches = window.GM_STATE.trending_product_search.popular_searches
+
+const reducer = (open, action) => {
   switch (action) {
     case 'open': return 1
     case 'close': return 0
@@ -64,9 +67,7 @@ function App() {
 
 function SearchBarNativeDropdown({ originalQuery }) {
   const [searchData, setSearchData] = useState(null)
-  const [isFetching, setIsFetching] = useState(false)
   const fetchData = async () => {
-    setIsFetching(true)
     try {
       const response = await fetch(`/search/suggest.json?q=${encodeURIComponent(originalQuery)}`)
       if (!response.ok) {
@@ -75,40 +76,75 @@ function SearchBarNativeDropdown({ originalQuery }) {
       }
       const data = await response.json()
       setSearchData(data?.resources?.results)
-      setIsFetching(false)
     } catch (error) {
       console.error(error)
       setSearchData(null)
-      setIsFetching(false)
     }
   }
   useEffect(() => {
     fetchData()
   }, [originalQuery])
+  console.log(searchData)
   return (
-    <div className="search-result-dropdown">
-      <div className="popular-searches"></div>
-      <div className="trending-products absolute top-full w-full grid grid-cols-3 max-h-96 overflow-auto bg-white">
-        { searchData?.products?.length > 0
-          ? <>
-            <ProductItems products={searchData.products} />
-            {searchData?.products?.length > 6 && (
-              <div>View all {searchData?.products?.length} products</div>
-            )}
-          </>
-          : ''
+    <div className="search-result-dropdown absolute top-full w-full flex">
+      <div className="popular-searches max-w-[248px] bg-white">
+        {searchData && searchData.collections.length > 0 &&
+          (
+            <div className="collections w-full">
+                <h5>{ searchData.collections.key }</h5>
+                { searchData.collections.map((item) => {
+                  return <a href={item.url} className="item block mt-2">{item.title}</a>
+                })
+                }
+            </div>
+          )
         }
+        {searchData && searchData.pages.length > 0 &&
+          (
+            <div className="pages w-full">
+                <h5>{ searchData.collections.key }</h5>
+                { searchData.pages.map((item) => {
+                  return <a href={item.url} className="item block mt-2">{item.title}</a>
+                })
+                }
+            </div>
+          )
+        }
+        {searchData && searchData.queries.length > 0 &&
+          (
+            <div className="queries w-full">
+                <h5>{ searchData.collections.key }</h5>
+                { searchData.queries.map((item) => {
+                  return <a href={item.url} className="item block mt-2">{item.title}</a>
+                })
+                }
+            </div>
+          )
+        }
+      </div>
+      <div className="products-search">
+        <div className="w-full grid grid-cols-3 max-h-[402px] overflow-auto bg-white p-4 xl:p-6">
+          { searchData?.products?.length > 0
+            ? <>
+              <ProductItemsSearch products={searchData.products} />
+            </>
+            : <ProductItemsTrending products={trendingProducts} />
+          }
+        </div>
+        {searchData?.products?.length > 6 && (
+          <div className="text-center p-3 bg-white">View all {searchData?.products?.length} products</div>
+        )}
       </div>
     </div>
   )
 }
 
-function ProductItems({ products }) {
+function ProductItemsSearch({ products }) {
   return products.map(
     (product) =>
       product && (
         <PlpCard
-          className="plp-card-search relative flex flex-col"
+          className="plp-card-search relative flex xl:[&>.plp-card-image]:w-[124px] xl:[&>.plp-card-image]:h-[124px]"
           title={getProductTitle(product.title)}
           subtitle={product.title}
           url={product.url}
@@ -116,6 +152,29 @@ function ProductItems({ products }) {
           secondImageUrl={product.images}
           variants={product.variants}
           options={getOptions(product.options)}
+          tags={getTags(product.tags)}
+          price={getPrice(product.price)}
+          originalPrice={getPrice(product.msrp)}
+          inSuggestion={true}
+          showQuickAdd={false}
+          handle={product.handle}
+        />
+      )
+  )
+}
+
+function ProductItemsTrending({ products }) {
+  return products.map(
+    (product) =>
+      product && (
+        <PlpCard
+          className="plp-card-search relative flex xl:[&>.plp-card-image]:w-[124px] xl:[&>.plp-card-image]:h-[124px]"
+          title={getProductTitle(product.title)}
+          subtitle={product.title}
+          url={product.url}
+          imageUrl={getImages(product.featured_image, product.thumbnailImageUrl)}
+          secondImageUrl={product.images}
+          variants={product.variants}
           tags={getTags(product.tags)}
           price={getPrice(product.price)}
           originalPrice={getPrice(product.msrp)}
