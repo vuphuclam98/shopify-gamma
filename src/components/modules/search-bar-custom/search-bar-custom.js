@@ -123,7 +123,7 @@ function SearchBarNativeDropdown({ originalQuery }) {
         }
       </div>
       <div className="products-search">
-        <div className="w-full grid grid-cols-3 max-h-[402px] overflow-auto bg-white p-4 xl:p-6">
+        <div className="w-full grid grid-cols-3 max-h-[402px] overflow-auto scrollbar-hide bg-white p-4 xl:p-6">
           { searchData?.products?.length > 0
             ? <>
               <ProductItemsSearch products={searchData.products} />
