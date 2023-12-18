@@ -84,7 +84,7 @@ function PlpCard({
             className="aspect-[1/1]"
             imageClass="w-full h-full"
             imageBreakpoints="(min-width: 768px)|(min-width: 0px)"
-            isCover={false}
+            isCover={true}
             isLazy={true}
             key={handle}
           />
@@ -107,16 +107,16 @@ function PlpCard({
           <a
             href={`/${productUrl}/${handle}`}
             title={title}
-            className="plp-card-title-link text-sm font-bold !tracking-normal text-grey-900 md:text-base"
+            className="plp-card-title-link font-normal text-grey-700 text-base"
             onClick={onTracking}
             dangerouslySetInnerHTML={{ __html: title }}
           ></a>
         </h3>
-      </div>
-      <div className="plp-card-content flex flex-col md:px-4">
-        <span className="plp-card-variant mb-1 text-center text-sm tracking-normal text-grey-500 md:text-sm">{getProductSubtitle(subtitle)}</span>
-        <PlpCardPrice price={price} originalPrice={originalPrice} />
-        {renderButton()}
+        <div className="plp-card-content flex flex-col md:px-4">
+          <span className="plp-card-variant mb-1 text-center text-sm tracking-normal text-grey-500 md:text-sm">{getProductSubtitle(subtitle)}</span>
+          <PlpCardPrice price={price} originalPrice={originalPrice} />
+          {renderButton()}
+        </div>
       </div>
     </div>
   )

@@ -6,7 +6,7 @@ function PlpCardPrice({ price, originalPrice }) {
       price={price}
       originalPrice={originalPrice}
       className="plp-card-price mt-1 flex flex-row-reverse justify-center gap-2 md:mt-3"
-      classSize="text-base md:text-lg text-grey-900"
+      classSize="text-lg text-grey-700"
     />
   )
 }

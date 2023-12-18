@@ -1,0 +1,16 @@
+{%- liquid
+    assign popular_searches = popular_searches
+-%}
+
+{%- capture custom_badge -%}
+    {%- for item in linklists[popular_searches].links -%}
+        {
+            title: {{- item.title | json -}},
+            url: {{- item.url | json -}}
+        },
+    {%- endfor -%}
+{%- endcapture -%}
+
+{
+  "items": [{{- custom_badge -}}]
+}

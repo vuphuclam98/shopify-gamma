@@ -20,10 +20,10 @@ module.exports = {
       '3xl': ['30px', { lineHeight: '36px' }],
       '2xl': ['24px', { lineHeight: '32px' }],
       xl: ['20px', { lineHeight: '28px' }],
-      lg: ['18px', { lineHeight: '24px' }],
+      lg: ['18px', { lineHeight: '26px' }],
       base: ['16px', { lineHeight: '24px' }],
       sm: ['14px', { lineHeight: '22px' }],
-      xs: ['12px', { lineHeight: '16px' }]
+      xs: ['12px', { lineHeight: '18px' }]
     },
     fontFamily: {
       sans: ['BrownStd', 'sans-serif']
@@ -39,7 +39,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT:  '#5046E5',
+          DEFAULT:  '#3385D0',
           hover: '#6D64EE'
         },
         secondary: {
@@ -85,13 +85,13 @@ module.exports = {
           100: '#E7E7E7',
           400: '#A4A8AF',
           500: '#7A7D81',
-          700: '#404346',
+          700: '#527799',
           900: '#232323'
         }
       },
       borderColor: {
-        DEFAULT: '#E7E7E7',
-        default: '#E7E7E7',
+        DEFAULT: '#ACCCE9',
+        default: '#ACCCE9',
         focus: '#7A7D81',
         error: '#C9211B'
       },
@@ -113,6 +113,9 @@ module.exports = {
         '2xl': '1rem', /* 16px */
         '3xl': '1.5rem', /* 24px */
         full: '9999px'
+      },
+      letterSpacing: {
+        sm: '0.5px'
       }
     }
   },

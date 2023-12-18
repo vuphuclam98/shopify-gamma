@@ -13,7 +13,7 @@
     },
     shopify: {
       shop: {{ shop.permanent_domain | split: '.' | first | json }},
-      templateName: {{ template.name | json }},
+    templateName: {{ template.name | json }},
       defaultCurrency: {{ settings.currency_code_iso_default | json }},
       moneyFormat: {{ shop.money_format | json }},
       defaultImage: {%- if settings.default_image != blank -%}"{{- settings.default_image | image_url: 'master' -}}"{%- else -%}"{{- 'great-success.png' | asset_url -}}"{%- endif -%},
@@ -47,9 +47,20 @@
     },
     trending_product_search: {
       products: {{- settings.product_recommendations.products | json -}},
-      popular_searches: {{- linklists[settings.popular_searches].links | json -}}
+      popular_searches : {% render 'popular-search', popular_searches: settings.popular_searches %}
     }
   };
+
+  var dropdownSearch = {
+    translates: {
+      trending_product: {{ 'search.trending_product' | t | json }},
+      popular_searches: {{ 'search.popular_searches' | t | json }},
+      collections: {{ 'search.collections' | t | json }},
+      pages: {{ 'search.pages' | t | json }},
+      suggestions: {{ 'search.suggestions' | t | json }},
+      products: {{ 'search.products' | t | json }}
+    }
+  }
 </script>
 
 {%- capture src_url -%}

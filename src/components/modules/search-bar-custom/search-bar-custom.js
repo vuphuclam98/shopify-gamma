@@ -7,6 +7,7 @@ import { getProductTitle } from 'uses/useShopify'
 import LoaderSpin from 'snippets/loader-spin/loader-spin'
 import debounce from 'lodash.debounce'
 
+const translates = window.dropdownSearch.translates
 const initialState = 0
 const trendingProducts = window.GM_STATE.trending_product_search.products
 const popularSearches = window.GM_STATE.trending_product_search.popular_searches
@@ -86,12 +87,12 @@ function SearchBarNativeDropdown({ originalQuery }) {
   }, [originalQuery])
   console.log(searchData)
   return (
-    <div className="search-result-dropdown absolute top-full w-full flex">
-      <div className="popular-searches max-w-[248px] bg-white">
+    <div className="search-result-dropdown absolute top-full w-full flex bg-white">
+      <div className="popular-searches max-w-[248px] border-r border-default">
         {searchData && searchData.collections.length > 0 &&
           (
-            <div className="collections w-full">
-                <h5>{ searchData.collections.key }</h5>
+            <div className="collections w-full first:pt-6 px-6">
+                <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.collections }</h5>
                 { searchData.collections.map((item) => {
                   return <a href={item.url} className="item block mt-2">{item.title}</a>
                 })
@@ -101,8 +102,8 @@ function SearchBarNativeDropdown({ originalQuery }) {
         }
         {searchData && searchData.pages.length > 0 &&
           (
-            <div className="pages w-full">
-                <h5>{ searchData.collections.key }</h5>
+            <div className="pages w-full first:pt-6 px-6">
+                <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.pages }</h5>
                 { searchData.pages.map((item) => {
                   return <a href={item.url} className="item block mt-2">{item.title}</a>
                 })
@@ -112,8 +113,8 @@ function SearchBarNativeDropdown({ originalQuery }) {
         }
         {searchData && searchData.queries.length > 0 &&
           (
-            <div className="queries w-full">
-                <h5>{ searchData.collections.key }</h5>
+            <div className="queries w-full first:pt-6 px-6">
+                <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.suggestions }</h5>
                 { searchData.queries.map((item) => {
                   return <a href={item.url} className="item block mt-2">{item.title}</a>
                 })
@@ -121,9 +122,22 @@ function SearchBarNativeDropdown({ originalQuery }) {
             </div>
           )
         }
+        {searchData?.products?.length < 1 &&
+          <div className="queries w-full first:pt-6 px-6">
+              <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.popular_searches }</h5>
+              {popularSearches.items.map((item) => {
+                return <h5>{item.title}</h5>
+              })}
+          </div>
+        }
       </div>
       <div className="products-search">
-        <div className="w-full grid grid-cols-3 max-h-[402px] overflow-auto scrollbar-hide bg-white p-4 xl:p-6">
+        <div className="p-4 pt-6 xl:p-6 uppercase [&>h5]:text-primary">
+          { searchData?.products?.length > 0
+            ? <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.products }</h5>
+            : <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.trending_product }</h5> }
+        </div>
+        <div className="w-full grid grid-cols-3 max-h-[402px] overflow-auto scrollbar-hide bg-white px-4 xl:px-6">
           { searchData?.products?.length > 0
             ? <>
               <ProductItemsSearch products={searchData.products} />
@@ -144,7 +158,7 @@ function ProductItemsSearch({ products }) {
     (product) =>
       product && (
         <PlpCard
-          className="plp-card-search relative flex xl:[&>.plp-card-image]:w-[124px] xl:[&>.plp-card-image]:h-[124px]"
+          className="plp-card-search relative flex xl:[&>.plp-card-image]:w-32 xl:[&>.plp-card-image]:h-32 xl:[&>.plp-card-image]:pb-1 xl:[&>.plp-card-title]:ml-3"
           title={getProductTitle(product.title)}
           subtitle={product.title}
           url={product.url}
@@ -168,7 +182,7 @@ function ProductItemsTrending({ products }) {
     (product) =>
       product && (
         <PlpCard
-          className="plp-card-search relative flex xl:[&>.plp-card-image]:w-[124px] xl:[&>.plp-card-image]:h-[124px]"
+          className="plp-card-search relative flex xl:[&>.plp-card-image]:w-32 xl:[&>.plp-card-image]:h-32 xl:[&>.plp-card-image]:pb-1 xl:[&>.plp-card-title]:ml-3"
           title={getProductTitle(product.title)}
           subtitle={product.title}
           url={product.url}
