@@ -26,7 +26,8 @@ module.exports = {
       xs: ['12px', { lineHeight: '18px' }]
     },
     fontFamily: {
-      sans: ['BrownStd', 'sans-serif']
+      sans: ['BrownStd', 'sans-serif'],
+      sans: ['GillSans', 'sans-serif']
     },
     container: {
       center: true,
