@@ -169,7 +169,7 @@ function SearchBarNativeDropdown({ originalQuery }) {
             : <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.trending_product }</h5> }
         </div>
         {/* kiểm tra sản phẩm tìm kiếm, nếu không có sẽ hiển thị danh sách trending product */}
-        <div className="w-full grid grid-cols-3 max-h-[402px] overflow-auto scrollbar-hide bg-white px-4 xl:px-6">
+        <div className={`w-full grid grid-cols-3 max-h-[402px] overflow-auto scrollbar-hide bg-white px-4 xl:px-6 ${searchData?.products?.length > 6 ? ' pb-12' : ''}`}>
           { searchData?.products?.length > 0
             ? <ProductItemsSearch products={searchData.products} />
             : <ProductItemsTrending products={trendingProducts} />
@@ -177,7 +177,7 @@ function SearchBarNativeDropdown({ originalQuery }) {
         </div>
         {/* hiển thị tổng số sản phẩm tìm kiếm được */}
         {searchData?.products?.length > 6 && (
-          <a href="" className="text-center p-3 bg-white absolute bottom-0 border-t w-full border-default">View all {searchData?.products?.length} products</a>
+          <a href="" className="text-center p-3 text-primary bg-white absolute bottom-0 border-t w-full border-default">View all {searchData?.products?.length} products</a>
         )}
       </div>
     </div>
