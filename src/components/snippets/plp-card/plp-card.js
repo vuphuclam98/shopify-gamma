@@ -107,7 +107,7 @@ function PlpCard({
           <a
             href={`/${productUrl}/${handle}`}
             title={title}
-            className="plp-card-title-link font-normal text-grey-700 text-base"
+            className="plp-card-title-link font-normal text-grey-700 text-base hover:underline"
             onClick={onTracking}
             dangerouslySetInnerHTML={{ __html: title }}
           ></a>

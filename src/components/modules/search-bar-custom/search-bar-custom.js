@@ -109,13 +109,13 @@ function SearchBarNativeDropdown({ originalQuery }) {
   }, [originalQuery])
   // code here...
   return (
-    <div className="search-result-dropdown absolute top-full w-full flex bg-white">
-      <div className="popular-searches max-w-[248px] w-full border-r border-default">
+    <div className="search-result-dropdown absolute top-full w-full sm:flex bg-white">
+      <div className="popular-searches sm:max-w-[200px] lg:max-w-[248px] w-full border-r border-default">
         {/* kiểm tra và hiển thị danh sách suggestions tìm kiếm được */}
         {/* code here... */}
         {searchData && searchData.queries.length > 0 &&
           (
-            <div className="queries w-full first:pt-6 px-6">
+            <div className="queries mb-6 w-full first:pt-6 px-6">
                 <h5 className="font-GillSans text-xs text-primary font-semibold uppercase tracking-sm">{ translates.suggestions }</h5>
                 { searchData.queries.map((item) => {
                   return <a href={item.url} className="item block mt-2 hover:underline">{item.text}</a>
@@ -128,7 +128,7 @@ function SearchBarNativeDropdown({ originalQuery }) {
         {/* code here... */}
         {searchData && searchData.collections.length > 0 &&
           (
-            <div className="collections w-full first:pt-6 px-6">
+            <div className="collections mb-6 w-full first:pt-6 px-6">
                 <h5 className="font-GillSans text-xs text-primary font-semibold uppercase tracking-sm">{ translates.collections }</h5>
                 { searchData.collections.map((item) => {
                   return <a href={item.url} className="item block mt-2 hover:underline">{item.title}</a>
@@ -141,7 +141,7 @@ function SearchBarNativeDropdown({ originalQuery }) {
         {/* code here... */}
         {searchData && searchData.pages.length > 0 &&
           (
-            <div className="pages w-full first:pt-6 px-6">
+            <div className="pages mb-6 w-full first:pt-6 px-6">
                 <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.pages }</h5>
                 { searchData.pages.map((item) => {
                   return <a href={item.url} className="item block mt-2 hover:underline">{item.title}</a>
@@ -153,7 +153,7 @@ function SearchBarNativeDropdown({ originalQuery }) {
         {/* hiển thị danh sách tìm kiếm phổ biến, khi không tìm được sản phầm liên quan */}
         {/* code here... */}
         {searchData?.products?.length < 1 &&
-          <div className="popular-search w-full first:pt-6 px-6">
+          <div className="popular-search mb-6 w-full first:pt-6 px-6">
               <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.popular_searches }</h5>
               {popularSearches.items.map((item) => {
                 return <a href={item.url} className="item block mt-2 hover:underline">{item.title}</a>
@@ -163,13 +163,13 @@ function SearchBarNativeDropdown({ originalQuery }) {
       </div>
       <div className="products-search relative">
         {/* kiểm tra sản phẩm tìm kiếm, nếu không có sẽ hiển thị danh sách trending product */}
-        <div className="p-4 pt-6 xl:p-6 uppercase [&>h5]:text-primary">
+        <div className="p-4 pt-0 sm:pt-6 xl:p-6 uppercase [&>h5]:text-primary">
           { searchData?.products?.length > 0
             ? <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.products }</h5>
             : <h5 className="text-xs text-primary font-semibold uppercase tracking-sm">{ translates.trending_product }</h5> }
         </div>
         {/* kiểm tra sản phẩm tìm kiếm, nếu không có sẽ hiển thị danh sách trending product */}
-        <div className={`w-full grid grid-cols-3 max-h-[402px] overflow-auto scrollbar-hide bg-white px-4 xl:px-6 ${searchData?.products?.length > 6 ? ' pb-12' : ''}`}>
+        <div className={`w-full grid grid-cols-2 gap-4 lg:gap-6 lg:grid-cols-3 max-h-[402px] overflow-auto scrollbar-hide bg-white px-4 xl:px-6 ${searchData?.products?.length > 6 ? ' pb-12' : ''}`}>
           { searchData?.products?.length > 0
             ? <ProductItemsSearch products={searchData.products} />
             : <ProductItemsTrending products={trendingProducts} />
@@ -190,7 +190,7 @@ function ProductItemsSearch({ products }) {
     (product) =>
       product && (
         <PlpCard
-          className="plp-card-search relative flex xl:[&>.plp-card-image]:w-32 xl:[&>.plp-card-image]:h-32 xl:[&>.plp-card-image]:pb-1 xl:[&>.plp-card-title]:ml-3"
+          className="plp-card-search relative sm:flex sm:[&>.plp-card-image]:w-32 sm:[&>.plp-card-image]:h-32 sm:[&>.plp-card-image]:pb-1 xl:[&>.plp-card-title]:ml-3"
           title={getProductTitle(product.title)}
           subtitle={product.title}
           url={product.url}
@@ -215,7 +215,7 @@ function ProductItemsTrending({ products }) {
     (product) =>
       product && (
         <PlpCard
-          className="plp-card-search relative flex xl:[&>.plp-card-image]:w-32 xl:[&>.plp-card-image]:h-32 xl:[&>.plp-card-image]:pb-1 xl:[&>.plp-card-title]:ml-3"
+          className="plp-card-search relative sm:flex sm:[&>.plp-card-image]:w-32 sm:[&>.plp-card-image]:h-32 sm:[&>.plp-card-image]:pb-1 xl:[&>.plp-card-title]:ml-3"
           title={getProductTitle(product.title)}
           subtitle={product.title}
           url={product.url}
